@@ -92,8 +92,21 @@
             margin-bottom: 1rem;
             display: block; 
             text-transform: uppercase;
+            text-align: center; /* Centraliza o refrão */
         }
 
+        /* AJUSTE PARA O FUNDO DO TEXTO DO HINO E ORAÇÃO */
+        .hino-content-bg {
+             background-color: #1f2937; /* Fundo ligeiramente mais escuro que o card principal */
+             border-radius: 0.75rem;
+             padding: 1.25rem;
+             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Ajuste Específico para Oração: Forçar cor branca */
+        #oracao-section .text-amber-200 { color: #f1f5f9 !important; } 
+        #oracao-section .font-bold { font-weight: 400 !important; }
+        
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #1e293b; }
         ::-webkit-scrollbar-thumb { background: #64748b; border-radius: 4px; }
@@ -349,10 +362,8 @@
 
         <!-- SEÇÃO 2: HINO (Inicialmente Escondida) -->
         <div id="hino-section" class="hidden space-y-6">
-            <div class="card rounded-xl shadow-lg p-5">
+            <div class="hino-content-bg rounded-xl shadow-lg p-5">
                 <h2 class="text-2xl font-bold mb-4 text-amber-200 text-center">Hino do Jubileu de 160 Anos</h2>
-                
-                <h3 class="text-xl font-bold mb-6 text-amber-400 text-center">Ano Jubilar 1866 – 2026</h3>
                 
                 <div class="text-sm text-gray-300">
                     <p class="verse-block">
@@ -392,7 +403,7 @@
                         O jubileu de cento e sessenta anos<br>
                         de história!
                     </span>
-
+                    
                     <p class="verse-block pt-4">
                         Que a fé que herdamos acesa<br>
                         Nos guarde em Vós, fortaleza.<br>
@@ -415,21 +426,19 @@
 
         <!-- SEÇÃO 3: ORAÇÃO (Inicialmente Escondida) -->
         <div id="oracao-section" class="hidden space-y-6">
-            <div class="card rounded-xl shadow-lg p-5">
+            <div class="hino-content-bg rounded-xl shadow-lg p-5">
                 <h2 class="text-2xl font-bold mb-4 text-amber-200 text-center">Oração do Jubileu de 160 Anos</h2>
                 
                 <div class="text-sm text-gray-300 space-y-4">
-                    <p class="font-bold">ANO JUBILAR 1866 – 2026</p>
-
                     <p class="pt-2">Deus Todo-poderoso, Senhor do Tempo e da História, a Ti elevamos nossa voz neste Ano de Graça. Somos herdeiros de 160 anos de fé que não se dobrou, e Te bendizemos por cada vida iluminada, por cada Sacramento que fez este Templo pulsar com a força do Teu Reino.</p>
                     
-                    <p class="font-bold text-amber-200 pt-2">Senhor Jesus Cristo, Fonte Eterna de Misericórdia, concede-nos viver este Jubileu com coração renovado.</p>
+                    <p class="pt-2">Senhor Jesus Cristo, Fonte Eterna de Misericórdia, concede-nos viver este Jubileu com coração renovado.</p>
                     
                     <p>Purifica-nos. Reconcilia-nos. Reergue-nos na luz da Tua Ressurreição, para que sejamos um só povo, firme e ardente na fé.</p>
                     
                     <p>Que a memória dos que vieram antes de nós seja chama que não se apaga e nos impulsione a levar o Evangelho com coragem, esperança e verdade.</p>
                     
-                    <p class="font-bold text-amber-200 pt-2">Nossa Senhora da Conceição, Mãe e Padroeira, estrela que guia os passos desta Paróquia, intercede por nós.</p>
+                    <p class="pt-2">Nossa Senhora da Conceição, Mãe e Padroeira, estrela que guia os passos desta Paróquia, intercede por nós.</p>
                     
                     <p>Guarda-nos no Teu manto, inspira-nos com o Teu "Sim" e conduz-nos a uma nova primavera espiritual.</p>
                     
