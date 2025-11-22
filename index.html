@@ -41,9 +41,9 @@
             color: #94a3b8; /* Cor do texto das abas inativas */
         }
         .tab-button.active { 
-            border-color: #60a5fa; /* Borda da aba ativa (Azul Claro) */
+            border-color: #f59e0b; /* Borda da aba ativa (Âmbar/Areia) */
             font-weight: 700; 
-            color: #60a5fa; /* Cor do texto da aba ativa */
+            color: #f59e0b; /* Cor do texto da aba ativa (Âmbar/Areia) */
         }
 
         /* Estilo para a Barra de Dias (Picker) */
@@ -59,15 +59,31 @@
             color: #cbd5e1; /* Texto dos botões de data */
         }
         .date-button.active { 
-            background-color: #60a5fa; /* Fundo do botão ativo (Azul Claro) */
-            color: #0f172a; /* Texto escuro do botão ativo */
+            background-color: #f59e0b; /* Fundo do botão ativo (Âmbar/Areia) */
+            color: #1e293b; /* Texto escuro do botão ativo */
         }
 
-        /* Cores de Destaque no Dark Mode */
-        .text-blue-800 { color: #93c5fd; } /* Títulos de cartões */
-        .text-blue-900 { color: #dbeafe; } /* Títulos grandes */
-        .text-blue-600 { color: #60a5fa; } /* Horários e Links */
+        /* Cores de Destaque no Dark Mode (AZUL -> AREIA CLARO) */
+        .text-blue-800 { color: #fef3c7; } /* Títulos de cartões (Quase Branco) */
+        .text-blue-900 { color: #fef9c3; } /* Títulos grandes (Quase Branco) */
+        .text-blue-600 { color: #f59e0b; } /* Horários e Links (Âmbar/Areia) */
         .text-gray-500 { color: #94a3b8; } /* Texto secundário */
+        .text-gray-300 { color: #cbd5e1; } /* Texto de conteúdo geral */
+
+        /* Corrigido o contraste dos links dos Contatos */
+        .bg-green-400\/20 { background-color: rgba(52, 211, 163, 0.2); }
+        .bg-pink-400\/20 { background-color: rgba(244, 114, 182, 0.2); }
+        .bg-blue-400\/20 { background-color: rgba(96, 165, 250, 0.2); }
+        .bg-red-400\/20 { background-color: rgba(251, 113, 133, 0.2); }
+
+        /* Correção para o Texto dentro dos Links de Contato: Tornar mais branco/visível */
+        .contact-link-text {
+            color: #f1f5f9; /* Texto claro para garantir visibilidade no fundo escuro do link */
+        }
+        
+        /* NOVO: Cor do Logótipo da Igreja - Ouro Suave */
+        .text-amber-400 { color: #fbbf24; }
+
 
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #1e293b; }
@@ -246,10 +262,10 @@
     <header class="border-b border-gray-700 sticky top-0 z-10 shadow-lg header-bg">
         <div class="max-w-xl mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <i data-lucide="church" class="text-blue-800 w-8 h-8"></i>
+                <i data-lucide="church" class="w-8 h-8 text-amber-400"></i>
                 <div>
-                    <h1 class="text-xl font-bold text-blue-900">Paróquia</h1>
-                    <p class="text-xs text-blue-600">Nossa Senhora da Conceição</p>
+                    <h1 class="text-xl font-bold text-amber-100">Paróquia</h1>
+                    <p class="text-xs text-amber-400">Nossa Senhora da Conceição</p>
                 </div>
             </div>
             <!-- Botão Removido -->
@@ -308,37 +324,40 @@
             <div class="card rounded-xl shadow-lg p-5 space-y-4">
                 <h2 class="text-xl font-bold mb-3 text-blue-800 flex items-center gap-2"><i data-lucide="phone-call" class="w-5 h-5"></i> Escritório Paroquial</h2>
                 
-                <a href="https://wa.me/553533731397" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-3 bg-green-900/40 hover:bg-green-800/40 rounded-lg transition-colors">
+                <!-- CORRIGIDO CONTRASTE: Fundos mais claros e texto do link mais visível -->
+                <a href="https://wa.me/553533731397" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-3 bg-green-400/20 hover:bg-green-300/20 rounded-lg transition-colors">
                     <i data-lucide="message-square" class="w-6 h-6 text-green-400"></i>
                     <div>
                         <p class="font-bold text-sm text-blue-800">WhatsApp Oficial</p>
-                        <p class="text-xs text-gray-400">(35) 3373-1397</p>
+                        <p class="text-xs text-gray-400 contact-link-text">(35) 3373-1397</p>
                     </div>
                 </a>
                 
-                <!-- NOVO ITEM: INSTAGRAM -->
-                <a href="https://www.instagram.com/aparoquia/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-3 bg-pink-900/40 hover:bg-pink-800/40 rounded-lg transition-colors">
+                <!-- CORRIGIDO CONTRASTE: Fundos mais claros e texto do link mais visível -->
+                <a href="https://www.instagram.com/aparoquia/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-3 bg-pink-400/20 hover:bg-pink-300/20 rounded-lg transition-colors">
                     <i data-lucide="instagram" class="w-6 h-6 text-pink-400"></i>
                     <div>
                         <p class="font-bold text-sm text-blue-800">Instagram Oficial</p>
-                        <p class="text-xs text-gray-400">@aparoquia</p>
+                        <p class="text-xs text-gray-400 contact-link-text">@aparoquia</p>
                     </div>
                 </a>
 
 
-                <a href="tel:+553532611217,8007" class="flex items-center gap-4 p-3 bg-blue-900/40 hover:bg-blue-800/40 rounded-lg transition-colors">
+                <!-- CORRIGIDO CONTRASTE: Fundos mais claros e texto do link mais visível -->
+                <a href="tel:+553532611217,8007" class="flex items-center gap-4 p-3 bg-blue-400/20 hover:bg-blue-300/20 rounded-lg transition-colors">
                     <i data-lucide="phone" class="w-6 h-6 text-blue-400"></i>
                     <div>
                         <p class="font-bold text-sm text-blue-800">Telefone com Ramal</p>
-                        <p class="text-xs text-gray-400">(35) 3261-1217 ramal 8007</p>
+                        <p class="text-xs text-gray-400 contact-link-text">(35) 3261-1217 ramal 8007</p>
                     </div>
                 </a>
 
-                <a href="mailto:paroquiavirginia@yahoo.com.br" class="flex items-center gap-4 p-3 bg-red-900/40 hover:bg-red-800/40 rounded-lg transition-colors">
+                <!-- CORRIGIDO CONTRASTE: Fundos mais claros e texto do link mais visível -->
+                <a href="mailto:paroquiavirginia@yahoo.com.br" class="flex items-center gap-4 p-3 bg-red-400/20 hover:bg-red-300/20 rounded-lg transition-colors">
                     <i data-lucide="mail" class="w-6 h-6 text-red-400"></i>
                     <div>
                         <p class="font-bold text-sm text-blue-800">E-mail Oficial</p>
-                        <p class="text-xs text-gray-400">paroquiavirginia@yahoo.com.br</p>
+                        <p class="text-xs text-gray-400 contact-link-text">paroquiavirginia@yahoo.com.br</p>
                     </div>
                 </a>
             </div>
@@ -346,7 +365,7 @@
             <div class="card rounded-xl shadow-lg p-5">
                 <h2 class="text-xl font-bold mb-3 text-blue-800 flex items-center gap-2"><i data-lucide="map-pin" class="w-5 h-5"></i> Localização</h2>
                 <p class="text-sm text-gray-300">Praça Cônego Monte Raso, nº 304 - Centro<br>37465-000, Virgínia/MG</p>
-                <a href="https://www.google.com/maps/search/?api=1&query=Praça+Cônego+Monte+Raso,+304,+Virgínia+-+MG" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 text-sm font-bold text-blue-400 hover:text-blue-500">
+                <a href="https://www.google.com/maps/search/?api=1&query=Praça+Cônego+Monte+Raso,+304,+Virgínia+-+MG" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-amber-500">
                     Ver no Mapa <i data-lucide="external-link" class="w-4 h-4"></i>
                 </a>
             </div>
