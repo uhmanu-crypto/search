@@ -10,25 +10,53 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Paróquia Conceição">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="manifest" href="data:application/json;base64,eyJpY29ucyI6W3sic2l6ZXMiOiI1MTJ4NTEyIiwidHlwZSI6ImltYWdlL3BuZyIsInNyYyI6Imh0dHBzOi8vY2RuLWljb25zLXBuZy5mbGF0aWNvbi5jb20vNTEyLzEyMTE0LzEyMTE0MjMzLnBuZyJ9XSwibmFtZSI6IlBhcsOzcXVpYSBOIFNyYSBkYSBDb25jZWnnw6NvIiwic2hvcnRfbmFtZSI6IkNvbmNlaSnnw6NvIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJzdGFydF91cmwiOiIuIiwiYmFja2dyb3VuZF9jb2xvciI6IiMxZTNhOGEiLCJ0aGVtZV9jb2xvciI6IiMxZTNhOGEiLCJvcmllbnRhdGlvbiI6InBvcnRyYWl0In0=">
+    <link rel="manifest" href="data:application/json;base64,eyJpY29ucyI6W3sic2l6ZXMiOiI1MTJ4NTEyIiwidHlwZSI6ImltYWdlL3BuZyIsInNyYyI6Imh0dHBzOi8vY2RuLWljb25zLXBuZy5mbGF0aWNvbi5jb20vNTEyLzEyMTE0LzEyMTE0MjMzLnBuZyJ9XSwibmFtZSI6IlBhcsOzcXVpYSBOIFNyYSBkYSBDb25jZWnnw6NvIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJzdGFydF91cmwiOiIuIiwiYmFja2dyb3VuZF9jb2xvciI6IiMxZTNhOGEiLCJ0aGVtZV9jb2xvciI6IiMxZTNhOGEiLCJvcmllbnRhdGlvbiI6InBvcnRyYWl0In0=">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Estilos e Cores para N. Sra. da Conceição (Azul e Branco) */
-        body { font-family: 'Roboto', sans-serif; background-color: #f8fafc; color: #1e3a8a; }
+        /* Estilos base para a Paróquia (Light Mode) */
+        body { font-family: 'Roboto', sans-serif; transition: background-color 0.3s, color 0.3s; }
         .tab-button { transition: all 0.3s ease; border-bottom: 3px solid transparent; padding-bottom: 8px; }
         .tab-button.active { border-color: #1e3a8a; font-weight: 700; color: #1e3a8a; }
-        .card { background-color: #ffffff; border: 1px solid #e2e8f0; }
-        .shadow-parish { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06), 0 0 0 4px rgba(30, 58, 138, 0.1); }
-        .agenda-header { background-color: #eff6ff; }
+        .card { transition: background-color 0.3s, border-color 0.3s; }
+        
+        /* Tema Claro */
+        .light-mode {
+            background-color: #f8fafc; /* slate-50 */
+            color: #1e3a8a; /* blue-800 */
+        }
+        .light-mode .card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0; /* slate-200 */
+        }
+        .light-mode .header-bg { background-color: #ffffff; }
+
+        /* Tema Escuro */
+        .dark-mode {
+            background-color: #0f172a; /* slate-900 */
+            color: #93c5fd; /* blue-300 */
+        }
+        .dark-mode .tab-button.active { border-color: #60a5fa; color: #60a5fa; }
+        .dark-mode .card {
+            background-color: #1e293b; /* slate-800 */
+            border: 1px solid #334155; /* slate-700 */
+            color: #e2e8f0; /* slate-200 */
+        }
+        .dark-mode .text-gray-500 { color: #94a3b8; }
+        .dark-mode .text-gray-600 { color: #cbd5e1; }
+        .dark-mode .text-blue-800 { color: #93c5fd; }
+        .dark-mode .text-blue-600 { color: #60a5fa; }
+        .dark-mode .header-bg { background-color: #1e293b; border-color: #334155; }
+        .dark-mode .border-gray-100 { border-color: #1e293b; }
+
         ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color-scrollbar-track, #f1f1f1); }
+        ::-webkit-scrollbar-thumb { background: var(--bg-color-scrollbar-thumb, #94a3b8); border-radius: 4px; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col light-mode">
     <!-- Dados da Agenda de Novembro (Direto no Código) -->
     <script>
         const AGENDA_DATA = [
@@ -129,8 +157,18 @@
             // Gerenciar Botões
             document.querySelectorAll('.tab-button').forEach(btn => {
                 btn.classList.remove('active');
+                if (document.body.classList.contains('dark-mode')) {
+                    btn.classList.remove('text-blue-800');
+                    btn.classList.add('text-gray-400');
+                } else {
+                    btn.classList.remove('text-gray-400');
+                    btn.classList.add('text-gray-500');
+                }
             });
-            document.getElementById(`${tabName}-btn`).classList.add('active');
+            const activeBtn = document.getElementById(`${tabName}-btn`);
+            activeBtn.classList.add('active');
+            activeBtn.classList.remove('text-gray-500', 'text-gray-400');
+
 
             // Gerenciar Conteúdo
             document.getElementById('agenda-content').classList.add('hidden');
@@ -145,27 +183,71 @@
             }
         }
         
+        // --- Dark Mode Logic ---
+
+        function applyTheme(isDark) {
+            const body = document.body;
+            if (isDark) {
+                body.classList.remove('light-mode');
+                body.classList.add('dark-mode');
+                // Altera a cor da meta tag do PWA para Dark Mode
+                document.querySelector('meta[name="theme-color"]').setAttribute('content', '#1e293b');
+                document.getElementById('theme-icon').innerHTML = '<i data-lucide="sun" class="w-5 h-5"></i>';
+            } else {
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+                // Altera a cor da meta tag do PWA para Light Mode
+                document.querySelector('meta[name="theme-color"]').setAttribute('content', '#1e3a8a');
+                document.getElementById('theme-icon').innerHTML = '<i data-lucide="moon" class="w-5 h-5"></i>';
+            }
+            // Chama a função de renderização novamente para aplicar as cores do tema
+            switchTab(currentTab); 
+            lucide.createIcons(); 
+        }
+
+        function toggleTheme() {
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+            applyTheme(!isDark);
+        }
+
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                applyTheme(true);
+            } else {
+                applyTheme(false);
+            }
+        }
+        
         // Inicialização
         document.addEventListener('DOMContentLoaded', () => {
+            loadTheme(); // Carrega o tema salvo
             lucide.createIcons();
             switchTab('agenda'); // Inicia na aba Agenda
         });
 
     </script>
 
-    <header class="border-b border-gray-200 bg-white sticky top-0 z-10 shadow-lg shadow-blue-50/50">
-        <div class="max-w-xl mx-auto px-4 py-4 flex items-center gap-3">
-            <i data-lucide="church" class="text-blue-800 w-8 h-8"></i>
-            <div>
-                <h1 class="text-xl font-bold text-blue-900">Paróquia</h1>
-                <p class="text-xs text-blue-600">Nossa Senhora da Conceição</p>
+    <header class="border-b border-gray-200 sticky top-0 z-10 shadow-lg header-bg">
+        <div class="max-w-xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <i data-lucide="church" class="text-blue-800 w-8 h-8"></i>
+                <div>
+                    <h1 class="text-xl font-bold text-blue-900">Paróquia</h1>
+                    <p class="text-xs text-blue-600">Nossa Senhora da Conceição</p>
+                </div>
             </div>
+            <!-- Botão de Modo Escuro/Claro -->
+            <button onclick="toggleTheme()" class="p-2 rounded-full text-blue-800 hover:text-blue-600 active:scale-95 transition-transform" id="theme-icon">
+                 <!-- Icone inserido por JS -->
+            </button>
         </div>
         <div class="max-w-xl mx-auto px-4 flex justify-around border-t border-gray-100">
-            <button id="agenda-btn" onclick="switchTab('agenda')" class="tab-button flex-1 py-3 text-sm text-gray-500 flex justify-center items-center gap-2">
+            <button id="agenda-btn" onclick="switchTab('agenda')" class="tab-button flex-1 py-3 text-sm flex justify-center items-center gap-2">
                 <i data-lucide="calendar-days" class="w-4 h-4"></i> Agenda
             </button>
-            <button id="mural-btn" onclick="switchTab('mural')" class="tab-button flex-1 py-3 text-sm text-gray-500 flex justify-center items-center gap-2">
+            <button id="mural-btn" onclick="switchTab('mural')" class="tab-button flex-1 py-3 text-sm flex justify-center items-center gap-2">
                 <i data-lucide="images" class="w-4 h-4"></i> Mural & Fotos
             </button>
         </div>
@@ -185,7 +267,7 @@
         <p class="mt-8 text-center text-xs text-gray-400">Dados de Novembro 2025 pré-carregados para visualização instantânea.</p>
     </main>
     
-    <footer class="text-center py-4 text-xs text-gray-500 border-t border-gray-200 mt-auto">
+    <footer class="text-center py-4 text-xs text-gray-500 border-t border-gray-200 mt-auto header-bg">
         Desenvolvido para N. Sra. da Conceição | App PWA
     </footer>
 </body>
