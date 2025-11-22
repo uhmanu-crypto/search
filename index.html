@@ -1,477 +1,72 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
-    <!-- Título -->
-    <title>CryptoLord</title>
-
-    <!-- --- FUSÃO SUPREMA: Manifesto Embutido --- -->
-    <link rel="manifest" href='data:application/manifest+json,%7B%22name%22%3A%22CryptoLord%22%2C%22short_name%22%3A%22CryptoLord%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230f172a%22%2C%22theme_color%22%3A%22%230f172a%22%2C%22orientation%22%3A%22portrait%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F12114%2F12114233.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%7D%5D%7D'>
-
-    <!-- Configurações PWA e iOS -->
-    <meta name="theme-color" content="#0f172a">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="CryptoLord">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Biblioteca de Gráficos -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'JetBrains Mono', monospace;
-            background-color: #0f172a;
-            color: #e2e8f0;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .cyber-card {
-            background: rgba(30, 41, 59, 0.7);
-            border: 1px solid #334155;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-        .cyber-card:active {
-            transform: scale(0.98); 
-        }
-        .pulse-dot {
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: .5; }
-        }
-        /* Esconder scrollbar mas manter funcionalidade */
-        ::-webkit-scrollbar {
-            width: 4px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0f172a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
-        }
-    </style>
-</head>
-<body class="min-h-screen flex flex-col pb-safe">
-
-    <!-- Header -->
-    <header class="border-b border-slate-800 bg-slate-900/90 sticky top-0 z-20 backdrop-blur-md pt-safe">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <i data-lucide="crown" class="text-yellow-500 w-8 h-8"></i>
-                <div>
-                    <h1 class="text-xl font-bold text-white tracking-wider">CRYPTO<span class="text-emerald-400">LORD</span></h1>
-                </div>
-            </div>
-            <div class="flex items-center gap-2 bg-slate-800 px-3 py-1 rounded-full border border-slate-700">
-                <div class="w-2 h-2 rounded-full bg-emerald-500 pulse-dot"></div>
-                <span class="text-xs font-medium text-emerald-400">ONLINE</span>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="flex-1 max-w-6xl mx-auto px-4 py-6 w-full">
-        
-        <!-- Status Bar & Sound Control -->
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-sm font-semibold text-slate-400 flex items-center gap-2">
-                <i data-lucide="activity" class="w-4 h-4"></i>
-                MERCADO AO VIVO
-            </h2>
-            <div class="flex gap-2">
-                <button onclick="toggleMute()" id="muteBtn" class="flex items-center gap-2 bg-slate-700 active:bg-slate-800 text-white px-3 py-2 rounded-lg transition-colors text-xs font-bold shadow-lg shadow-slate-900/20">
-                    <!-- Ícone será atualizado pelo JavaScript -->
-                </button>
-                <button onclick="fetchPrices()" id="refreshBtn" class="flex items-center gap-2 bg-emerald-600 active:bg-emerald-700 text-white px-4 py-2 rounded-lg transition-colors text-xs font-bold shadow-lg shadow-emerald-900/20">
-                    <i data-lucide="refresh-cw" class="w-3 h-3"></i>
-                    ATUALIZAR
-                </button>
-            </div>
-        </div>
-
-        <!-- Cards Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            
-            <!-- Bitcoin Card -->
-            <div class="cyber-card p-5 rounded-xl relative overflow-hidden group">
-                <div class="absolute top-0 right-0 p-4 opacity-10">
-                    <i data-lucide="bitcoin" class="w-20 h-20 text-orange-500"></i>
-                </div>
-                <div class="flex items-center gap-3 mb-3">
-                    <div class="p-2 bg-orange-500/20 rounded-lg">
-                        <i data-lucide="bitcoin" class="text-orange-500 w-6 h-6"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-lg text-white">Bitcoin</h3>
-                        <span class="text-xs text-slate-400">BTC</span>
-                    </div>
-                </div>
-                <div class="flex justify-between items-end">
-                    <p id="btc-price" class="text-xl font-bold text-white">...</p>
-                    <span id="btc-change" class="text-sm font-bold">--</span>
-                </div>
-            </div>
-
-            <!-- Ethereum Card -->
-            <div class="cyber-card p-5 rounded-xl relative overflow-hidden group">
-                <div class="absolute top-0 right-0 p-4 opacity-10">
-                    <i data-lucide="gem" class="w-20 h-20 text-purple-500"></i>
-                </div>
-                <div class="flex items-center gap-3 mb-3">
-                    <div class="p-2 bg-purple-500/20 rounded-lg">
-                        <i data-lucide="gem" class="text-purple-500 w-6 h-6"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-lg text-white">Ethereum</h3>
-                        <span class="text-xs text-slate-400">ETH</span>
-                    </div>
-                </div>
-                <div class="flex justify-between items-end">
-                    <p id="eth-price" class="text-xl font-bold text-white">...</p>
-                    <span id="eth-change" class="text-sm font-bold">--</span>
-                </div>
-            </div>
-
-            <!-- Dólar (USD) Card -->
-            <div class="cyber-card p-5 rounded-xl relative overflow-hidden group">
-                <div class="absolute top-0 right-0 p-4 opacity-10">
-                    <i data-lucide="dollar-sign" class="w-20 h-20 text-green-500"></i>
-                </div>
-                <div class="flex items-center gap-3 mb-3">
-                    <div class="p-2 bg-green-500/20 rounded-lg">
-                        <i data-lucide="dollar-sign" class="text-green-500 w-6 h-6"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-lg text-white">Dólar Americano</h3>
-                        <span class="text-xs text-slate-400">USD</span>
-                    </div>
-                </div>
-                <div class="flex justify-between items-end">
-                    <p id="usd-price" class="text-xl font-bold text-white">...</p>
-                    <span id="usd-change" class="text-sm font-bold">--</span>
-                </div>
-            </div>
-
-        </div>
-        
-        <!-- Graph Section (Bitcoin Trend) -->
-        <div class="cyber-card p-5 rounded-xl mb-6">
-            <h3 class="text-sm font-bold mb-4 flex items-center gap-2 text-orange-400">
-                <i data-lucide="trending-up" class="w-4 h-4"></i>
-                TENDÊNCIA BTC (Últimas Horas)
-            </h3>
-            <div class="relative h-48 w-full">
-                <canvas id="bitcoinChart"></canvas>
-            </div>
-            <p class="text-[10px] text-slate-600 mt-2 text-center">
-                *Dados simulados para visualização de tendência, o preço atual é o valor real.
-            </p>
-        </div>
-
-        <!-- Calculator Section -->
-        <div class="cyber-card p-5 rounded-xl mb-6">
-            <h3 class="text-sm font-bold mb-4 flex items-center gap-2 text-emerald-400">
-                <i data-lucide="calculator" class="w-4 h-4"></i>
-                SIMULADOR DE RIQUEZA
-            </h3>
-            <div class="space-y-3">
-                <div>
-                    <label class="text-xs text-slate-500 uppercase font-bold">Investimento (R$)</label>
-                    <input type="number" id="invest-input" value="1000" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-emerald-500 text-lg font-bold mt-1">
-                </div>
-                <div>
-                    <label class="text-xs text-slate-500 uppercase font-bold">Lucro Esperado (%)</label>
-                    <input type="number" id="percent-input" value="10" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-emerald-500 text-lg font-bold mt-1">
-                </div>
-                <button onclick="calculateProfit()" class="w-full bg-slate-700 active:bg-slate-600 text-white p-3 rounded-lg font-bold transition-colors flex justify-center items-center gap-2">
-                    CALCULAR
-                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                </button>
-            </div>
-            <div id="result-area" class="mt-4 pt-4 border-t border-slate-700/50 hidden">
-                <div class="flex justify-between items-center">
-                    <span class="text-slate-400 text-xs">Total Final:</span>
-                    <span class="text-xl font-bold text-emerald-400" id="calc-result">R$ 0,00</span>
-                </div>
-                <div class="flex justify-between items-center mt-1">
-                    <span class="text-slate-500 text-xs">Lucro Líquido:</span>
-                    <span class="text-sm font-bold text-emerald-500/80" id="profit-result">+R$ 0,00</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Log Terminal -->
-        <div class="mb-4">
-            <div class="flex justify-between items-end mb-2">
-                <h3 class="text-xs font-mono text-slate-600 uppercase">System Log</h3>
-                <button onclick="document.getElementById('system-log').innerHTML = ''" class="text-xs text-slate-600 hover:text-slate-400">Limpar</button>
-            </div>
-            <div id="system-log" class="font-mono text-[10px] leading-relaxed text-slate-400 bg-black/30 p-3 rounded-lg h-24 overflow-y-auto border border-slate-800/50">
-                <p>> Inicializando sistema móvel...</p>
-            </div>
-        </div>
-
-    </main>
-
-    <script>
-        lucide.createIcons();
-        let audioContext;
-        let bitcoinChart;
-        const IS_MUTED_KEY = 'cryptoLordMuted';
-        // ATUALIZAÇÃO: Mudamos 'solana' para 'tether' (USDT é um proxy 1:1 para USD)
-        const API_URL = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether&vs_currencies=brl&include_24hr_change=true';
-
-        // --- Configurações de Som ---
-        function getAudioContext() {
-            if (!audioContext) {
-                // Tenta inicializar o AudioContext
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            return audioContext;
-        }
-
-        function playSoundAlert() {
-            // Verifica se o som está mutado (usando localStorage para lembrar a preferência)
-            if (localStorage.getItem(IS_MUTED_KEY) === 'true') return;
-
-            try {
-                const ctx = getAudioContext();
-                if (ctx.state === 'suspended') {
-                    ctx.resume(); // Tenta resumir se estiver suspenso
-                }
-                
-                const oscillator = ctx.createOscillator();
-                const gainNode = ctx.createGain();
-
-                oscillator.connect(gainNode);
-                gainNode.connect(ctx.destination);
-
-                // Configuração para um "ping" agudo
-                oscillator.type = 'sine';
-                oscillator.frequency.setValueAtTime(880, ctx.currentTime); 
-
-                gainNode.gain.setValueAtTime(0, ctx.currentTime);
-                gainNode.gain.linearRampToValueAtTime(0.3, ctx.currentTime + 0.05);
-                gainNode.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.3);
-
-                oscillator.start(ctx.currentTime);
-                oscillator.stop(ctx.currentTime + 0.3);
-
-            } catch (e) {
-                // Captura erros se o navegador bloquear o áudio
-                console.warn("Audio playback failed (browser block or error):", e);
-            }
-        }
-
-        function toggleMute() {
-            const isMuted = localStorage.getItem(IS_MUTED_KEY) === 'true';
-            localStorage.setItem(IS_MUTED_KEY, !isMuted);
-            updateMuteButton(!isMuted);
-            log(`Alerta de som ${!isMuted ? 'desligado' : 'ligado'}.`);
-        }
-
-        function updateMuteButton(isMuted) {
-            const btn = document.getElementById('muteBtn');
-            btn.innerHTML = isMuted 
-                ? '<i data-lucide="volume-x" class="w-4 h-4"></i> MUTE'
-                : '<i data-lucide="volume-2" class="w-4 h-4"></i> SOM';
-            lucide.createIcons(); // Re-renderiza o ícone
-        }
-        
-        // --- Configurações de Gráfico (Chart.js) ---
-        function initializeChart() {
-            // Dados mockados para simular a tendência de 24h
-            const labels = ['00h', '04h', '08h', '12h', '16h', '20h', '24h'];
-            const mockData = [330000, 335000, 340000, 338000, 342000, 345000, 350000];
-
-            const ctx = document.getElementById('bitcoinChart').getContext('2d');
-            
-            bitcoinChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Preço (R$)',
-                        data: mockData,
-                        borderColor: '#f97316', // Laranja Bitcoin
-                        backgroundColor: 'rgba(249, 115, 22, 0.1)',
-                        fill: true,
-                        tension: 0.4,
-                        pointRadius: 3,
-                        pointBackgroundColor: '#f97316',
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        title: { display: false }
-                    },
-                    scales: {
-                        x: {
-                            grid: { color: '#1e293b' },
-                            ticks: { color: '#94a3b8' }
-                        },
-                        y: {
-                            grid: { color: '#1e293b' },
-                            ticks: { 
-                                color: '#94a3b8',
-                                callback: function(value) {
-                                    // Formata o preço no eixo Y
-                                    return 'R$ ' + value.toLocaleString('pt-BR');
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        }
-        
-        function updateChart(newPrice) {
-            if (bitcoinChart) {
-                // Simula a adição de um novo ponto de dados e remove o mais antigo
-                const data = bitcoinChart.data.datasets[0].data;
-                const labels = bitcoinChart.data.labels;
-                
-                data.shift(); // Remove o primeiro (mais antigo)
-                data.push(newPrice); // Adiciona o novo preço
-                
-                // Atualiza o label de tempo (Simulado)
-                const newLabel = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-                labels.shift();
-                labels.push(newLabel);
-
-                bitcoinChart.update();
-            }
-        }
-
-        // --- Funções de API e Lógica Principal ---
-        const log = (msg) => {
-            const logEl = document.getElementById('system-log');
-            const time = new Date().toLocaleTimeString().split(' ')[0];
-            logEl.innerHTML += `<p class="mb-1 border-l-2 border-emerald-900 pl-2"><span class="text-emerald-600">${time}</span> ${msg}</p>`;
-            logEl.scrollTop = logEl.scrollHeight;
-        }
-
-        const formatCurrency = (value) => {
-            return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-        }
-
-        const updateCard = (apiId, domPrefix, data) => {
-            const priceEl = document.getElementById(`${domPrefix}-price`);
-            const changeEl = document.getElementById(`${domPrefix}-change`);
-            
-            if (!priceEl || !changeEl) return;
-
-            const price = data[apiId].brl;
-            const change = data[apiId].brl_24h_change;
-
-            priceEl.innerText = formatCurrency(price);
-            
-            const isPositive = change >= 0;
-            changeEl.innerText = `${isPositive ? '▲' : '▼'} ${Math.abs(change).toFixed(2)}%`;
-            changeEl.className = `text-xs font-bold px-2 py-1 rounded ${isPositive ? 'bg-emerald-500/10 text-emerald-400' : 'bg-red-500/10 text-red-400'}`;
-            
-            // Flash effect
-            const card = priceEl.closest('.cyber-card');
-            card.style.borderColor = isPositive ? '#10b981' : '#ef4444';
-            setTimeout(() => card.style.borderColor = '#334155', 500);
-            
-            // Se for Bitcoin, atualiza o gráfico
-            if (domPrefix === 'btc') {
-                updateChart(price);
-            }
-        }
-
-        async function fetchPrices() {
-            const btn = document.getElementById('refreshBtn');
-            const icon = btn.querySelector('svg') || btn.querySelector('i');
-            
-            if (icon) {
-                icon.classList.add('animate-spin');
-            }
-            
-            btn.disabled = true;
-            btn.classList.add('opacity-70');
-
-            try {
-                const response = await fetch(API_URL);
-                if (!response.ok) throw new Error('Offline');
-                
-                const data = await response.json();
-                
-                updateCard('bitcoin', 'btc', data);
-                updateCard('ethereum', 'eth', data);
-                // ATUALIZAÇÃO: Chamada para Dólar (usando tether)
-                updateCard('tether', 'usd', data);
-
-                log('Cotações sincronizadas.');
-                playSoundAlert(); // Toca o som no sucesso!
-
-            } catch (error) {
-                console.error(error);
-                // ATUALIZAÇÃO: Dados mockados para o Dólar
-                const mockData = {
-                    bitcoin: { brl: 345200.50, brl_24h_change: 2.5 },
-                    ethereum: { brl: 18400.20, brl_24h_change: -1.2 },
-                    tether: { brl: 5.45, brl_24h_change: 0.15 } // Novo mock para USD (Tether)
-                };
-                updateCard('bitcoin', 'btc', mockData);
-                updateCard('ethereum', 'eth', mockData);
-                updateCard('tether', 'usd', mockData); // Chamada para Dólar com mock
-                log('Modo Offline: Dados simulados.');
-            } finally {
-                if (icon) {
-                    icon.classList.remove('animate-spin');
-                }
-                btn.disabled = false;
-                btn.classList.remove('opacity-70');
-            }
-        }
-        
-        function calculateProfit() {
-            const invest = parseFloat(document.getElementById('invest-input').value);
-            const percent = parseFloat(document.getElementById('percent-input').value);
-            
-            if (isNaN(invest) || isNaN(percent)) {
-                log('Erro: Valores inválidos.');
-                return;
-            }
-
-            const profit = invest * (percent / 100);
-            const total = invest + profit;
-            
-            document.getElementById('result-area').classList.remove('hidden');
-            document.getElementById('calc-result').innerText = formatCurrency(total);
-            document.getElementById('profit-result').innerText = `+${formatCurrency(profit)}`;
-            log(`Projeção calculada: +${formatCurrency(profit)}`);
-        }
-        
-        // --- Inicialização ---
-        document.addEventListener('DOMContentLoaded', () => {
-            // 1. Inicializa o estado do botão Mute
-            updateMuteButton(localStorage.getItem(IS_MUTED_KEY) === 'true');
-            
-            // 2. Inicializa o AudioContext no primeiro clique (necessário pelos navegadores)
-            document.body.addEventListener('click', getAudioContext, { once: true });
-            
-            // 3. Iniciar o gráfico e a busca de preços
-            initializeChart();
-            fetchPrices(); 
-            
-            // 4. Configura o intervalo de atualização
-            setInterval(fetchPrices, 30000); 
-        });
-        
-    </script>
-</body>
-</html>
+[
+  {
+    "date": "01/Nov",
+    "time": "09:00",
+    "title": "Casamento - Igreja Matriz",
+    "location": "Igreja Matriz",
+    "priest": "Pe. Aylton"
+  },
+  {
+    "date": "01/Nov",
+    "time": "10:00",
+    "title": "Benção bairro Marques",
+    "location": "bairro Marques",
+    "priest": "Pe. Erick"
+  },
+  {
+    "date": "01/Nov",
+    "time": "11:00",
+    "title": "Casamento - Igreja Matriz",
+    "location": "Igreja Matriz",
+    "priest": "Pe. Aylton"
+  },
+  {
+    "date": "01/Nov",
+    "time": "14:00",
+    "title": "Catequese - Igreja Matriz",
+    "location": "Igreja Matriz",
+    "priest": "Pe. Erick"
+  },
+  {
+    "date": "01/Nov",
+    "time": "16:00",
+    "title": "Santa Missa Igreja Matriz",
+    "location": "Igreja Matriz",
+    "priest": "Pe. Edimilson"
+  },
+  {
+    "date": "01/Nov",
+    "time": "18:00",
+    "title": "Vigília - Igreja Matriz",
+    "location": "Igreja Matriz",
+    "priest": "Pe. Edimilson"
+  },
+  {
+    "date": "01/Nov",
+    "time": "19:00",
+    "title": "Santa Missa Igreja Matriz",
+    "location": "Igreja Matriz",
+    "priest": "Pe. Erick"
+  },
+  {
+    "date": "02/Nov (Domingo)",
+    "time": "05:00",
+    "title": "Santa Missa no Cemitério",
+    "location": "Cemitério",
+    "priest": "Pe. Erick"
+  },
+  {
+    "date": "02/Nov (Domingo)",
+    "time": "08:00",
+    "title": "Santa Missa Setor 6",
+    "location": "Bairro São José da Mantiqueira",
+    "priest": "Pe. Erick"
+  },
+  {
+    "date": "02/Nov (Domingo)",
+    "time": "09:00",
+    "title": "Santa Missa Igreja Matriz",
+    "location": "Igreja Matriz",
+    "priest": "Pe. Edimilson"
+  }
+]
