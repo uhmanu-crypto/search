@@ -62,35 +62,35 @@
     <script>
         // *** DADOS COMPLETOS E SEM NOME DE PADRES ***
         const AGENDA_DATA = [
-            // EVENTOS DE 24 A 30 DE NOVEMBRO (EXCLUSIVO)
-            { "date": "24/Nov (Segunda)", "time": "09:00", "title": "Folga", "location": "Folga" },
-            { "date": "24/Nov (Segunda)", "time": "18:00", "title": "Visita às Obras", "location": "Vários Locais" },
-            { "date": "24/Nov (Segunda)", "time": "19:00", "title": "Santa Missa Sagrado Coração", "location": "Igreja Sagrado Coração" },
-            { "date": "24/Nov (Segunda)", "time": "20:00", "title": "Formação MESC", "location": "Formação MESC" },
+            // EVENTOS DE 24 A 30 DE NOVEMBRO (CORRIGIDOS E SEM INFORMAÇÃO SECRETA)
+            { "date": "24/Nov (Segunda-feira)", "time": "--", "title": "Folga", "location": "Folga" }, // CORRIGIDO: Folga com '--'
+            // Removido: Visita às Obras
+            { "date": "24/Nov (Segunda-feira)", "time": "18:00", "title": "Santa Missa Sagrado Coração", "location": "Igreja Sagrado Coração" }, // CORRIGIDO: 19:00 -> 18:00
+            { "date": "24/Nov (Segunda-feira)", "time": "19:00", "title": "Formação MESC", "location": "Formação MESC" }, // CORRIGIDO: 20:00 -> 19:00
 
-            { "date": "25/Nov (Terça)", "time": "09:00", "title": "Atendimento", "location": "Atendimento" },
-            { "date": "25/Nov (Terça)", "time": "14:00", "title": "Atendimento", "location": "Atendimento" },
-            { "date": "25/Nov (Terça)", "time": "19:00", "title": "Santa Missa Setor 4", "location": "Bairro Pereiras" },
-            { "date": "25/Nov (Terça)", "time": "19:00", "title": "Santa Missa Setor 7", "location": "Bairro Rio Acima II" },
-            { "date": "25/Nov (Terça)", "time": "20:00", "title": "Reunião Setor 7", "location": "Reunião Setor 7" },
+            { "date": "25/Nov (Terça-feira)", "time": "09:00", "title": "Atendimento", "location": "Atendimento" },
+            { "date": "25/Nov (Terça-feira)", "time": "14:00", "title": "Atendimento", "location": "Atendimento" },
+            { "date": "25/Nov (Terça-feira)", "time": "19:00", "title": "Santa Missa Setor 4", "location": "Bairro Pereiras" },
+            { "date": "25/Nov (Terça-feira)", "time": "19:00", "title": "Santa Missa Setor 7", "location": "Bairro Rio Acima II" },
+            { "date": "25/Nov (Terça-feira)", "time": "20:00", "title": "Reunião Setor 7", "location": "Reunião Setor 7" },
             
-            { "date": "26/Nov (Quarta)", "time": "09:00", "title": "Atendimento", "location": "Atendimento" },
-            { "date": "26/Nov (Quarta)", "time": "14:00", "title": "Atendimento", "location": "Atendimento" },
-            { "date": "26/Nov (Quarta)", "time": "19:00", "title": "Santa Missa Setor 1", "location": "Bairro Mendes" },
-            { "date": "26/Nov (Quarta)", "time": "19:00", "title": "Santa Missa Setor 4", "location": "Bairro Água Limpa" },
+            { "date": "26/Nov (Quarta-feira)", "time": "09:00", "title": "Atendimento", "location": "Atendimento" },
+            { "date": "26/Nov (Quarta-feira)", "time": "14:00", "title": "Atendimento", "location": "Atendimento" },
+            { "date": "26/Nov (Quarta-feira)", "time": "19:00", "title": "Santa Missa Setor 1", "location": "Bairro Mendes" },
+            { "date": "26/Nov (Quarta-feira)", "time": "19:00", "title": "Santa Missa Setor 4", "location": "Bairro Água Limpa" },
 
-            { "date": "27/Nov (Quinta)", "time": "05:00", "title": "Santa Missa Pedra Santa", "location": "Pedra Santa" },
-            { "date": "27/Nov (Quinta)", "time": "09:00", "title": "Abrigo São Camilo", "location": "Abrigo São Camilo" },
-            { "date": "27/Nov (Quinta)", "time": "14:00", "title": "Atendimento", "location": "Atendimento" },
-            { "date": "27/Nov (Quinta)", "time": "17:00", "title": "Confissão - Igreja Matriz", "location": "Igreja Matriz" },
-            { "date": "27/Nov (Quinta)", "time": "18:00", "title": "Adoração - Igreja Matriz", "location": "Igreja Matriz" },
-            { "date": "27/Nov (Quinta)", "time": "19:00", "title": "Santa Missa Igreja Matriz", "location": "Igreja Matriz" },
-            { "date": "27/Nov (Quinta)", "time": "19:00", "title": "Santa Missa Setor 1", "location": "Bairro Muquém" },
+            { "date": "27/Nov (Quinta-feira)", "time": "05:00", "title": "Santa Missa Pedra Santa", "location": "Pedra Santa" },
+            { "date": "27/Nov (Quinta-feira)", "time": "09:00", "title": "Abrigo São Camilo", "location": "Abrigo São Camilo" },
+            { "date": "27/Nov (Quinta-feira)", "time": "14:00", "title": "Atendimento", "location": "Atendimento" },
+            { "date": "27/Nov (Quinta-feira)", "time": "17:00", "title": "Confissão - Igreja Matriz", "location": "Igreja Matriz" },
+            { "date": "27/Nov (Quinta-feira)", "time": "18:00", "title": "Adoração - Igreja Matriz", "location": "Igreja Matriz" },
+            { "date": "27/Nov (Quinta-feira)", "time": "19:00", "title": "Santa Missa Igreja Matriz", "location": "Igreja Matriz" },
+            { "date": "27/Nov (Quinta-feira)", "time": "19:00", "title": "Santa Missa Setor 1", "location": "Bairro Muquém" },
 
-            { "date": "28/Nov (Sexta)", "time": "09:00", "title": "Atendimento", "location": "Atendimento" },
-            { "date": "28/Nov (Sexta)", "time": "14:00", "title": "Atendimento", "location": "Atendimento" },
-            { "date": "28/Nov (Sexta)", "time": "19:00", "title": "Santa Missa Setor 7", "location": "Bairro Vargem Alegre" },
-            { "date": "28/Nov (Sexta)", "time": "19:00", "title": "Primeiro dia da Novena", "location": "Novena" },
+            { "date": "28/Nov (Sexta-feira)", "time": "09:00", "title": "Atendimento", "location": "Atendimento" },
+            { "date": "28/Nov (Sexta-feira)", "time": "14:00", "title": "Atendimento", "location": "Atendimento" },
+            { "date": "28/Nov (Sexta-feira)", "time": "19:00", "title": "Santa Missa Setor 7", "location": "Bairro Vargem Alegre" },
+            { "date": "28/Nov (Sexta-feira)", "time": "19:00", "title": "Primeiro dia da Novena", "location": "Novena" },
             
             { "date": "29/Nov (Sábado)", "time": "10:00", "title": "Santa Missa Setor 1", "location": "Bairro Virgem do Socorro" },
             { "date": "29/Nov (Sábado)", "time": "11:00", "title": "Casamento - Igreja Matriz", "location": "Igreja Matriz" },
@@ -118,25 +118,25 @@
             const container = document.getElementById('agenda-content');
             container.innerHTML = ''; // Limpa o conteúdo
             const grouped = data.reduce((acc, item) => {
-                // Simplifica a data para agrupar pelo dia (Ex: 01/Nov)
-                const day = item.date.split('(')[0].trim();
-                if (!acc[day]) acc[day] = [];
-                acc[day].push(item);
+                // Obtém apenas o dia e a data para agrupar (Ex: 24/Nov (Segunda-feira))
+                const fullDayDate = item.date.trim();
+                if (!acc[fullDayDate]) acc[fullDayDate] = [];
+                acc[fullDayDate].push(item);
                 return acc;
             }, {});
 
-            for (const day in grouped) {
+            for (const fullDayDate in grouped) {
                 const dayContainer = document.createElement('div');
                 dayContainer.className = 'mb-6 p-4 card rounded-xl shadow-md';
                 
-                // Cabeçalho do Dia (Sábado/Domingo)
+                // Cabeçalho do Dia (Exibe data e dia da semana completo)
                 const dayHeader = document.createElement('h3');
                 dayHeader.className = 'font-bold text-lg border-b border-blue-100 pb-2 mb-3 text-blue-800';
-                dayHeader.innerHTML = `<i data-lucide="calendar-check" class="w-5 h-5 inline-block mr-2 text-blue-600"></i>${day}`;
+                dayHeader.innerHTML = `<i data-lucide="calendar-check" class="w-5 h-5 inline-block mr-2 text-blue-600"></i>${fullDayDate}`;
                 dayContainer.appendChild(dayHeader);
 
                 // Lista de Eventos do Dia
-                grouped[day].forEach(event => {
+                grouped[fullDayDate].forEach(event => {
                     const eventDiv = document.createElement('div');
                     eventDiv.className = 'flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0';
                     eventDiv.innerHTML = `
@@ -163,7 +163,7 @@
                 postDiv.innerHTML = `
                     <div class="h-48 w-full bg-gray-200 overflow-hidden relative">
                         <!-- Imagem do Mural/Atualização -->
-                        <img src="${post.imageUrl}" alt="Imagem da atualização" class="w-full h-full object-cover">
+                        <img src="${post.imageUrl}" alt="Imagem da atualização" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x200/94a3b8/fff?text=IMAGEM+INDISPONÍVEL';">
                         <span class="absolute top-3 right-3 bg-white text-blue-800 text-xs font-bold px-3 py-1 rounded-full shadow-lg">${post.date}</span>
                     </div>
                     <div class="p-4">
