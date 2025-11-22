@@ -64,13 +64,14 @@
         }
 
         /* Cores de Destaque no Dark Mode (AZUL -> AREIA CLARO) */
-        .text-blue-800 { color: #fef3c7; } /* Títulos de cartões (Quase Branco) */
-        .text-blue-900 { color: #fef9c3; } /* Títulos grandes (Quase Branco) */
+        /* --- TODOS OS TÍTULOS E DESTAQUES AGORA SÃO AMBER/AREIA --- */
+        .text-blue-800 { color: #fef3c7; } /* Títulos de cartões (Quase Branco/Areia) */
+        .text-blue-900 { color: #fef9c3; } /* Títulos grandes (Quase Branco/Areia) */
         .text-blue-600 { color: #f59e0b; } /* Horários e Links (Âmbar/Areia) */
         .text-gray-500 { color: #94a3b8; } /* Texto secundário */
         .text-gray-300 { color: #cbd5e1; } /* Texto de conteúdo geral */
 
-        /* Corrigido o contraste dos links dos Contatos */
+        /* Corrigido o contraste dos links dos Contatos (CORES VIBRANTES MANTIDAS) */
         .bg-green-400\/20 { background-color: rgba(52, 211, 163, 0.2); }
         .bg-pink-400\/20 { background-color: rgba(244, 114, 182, 0.2); }
         .bg-blue-400\/20 { background-color: rgba(96, 165, 250, 0.2); }
@@ -201,8 +202,8 @@
             const dayOfWeek = currentSelectedDate.split('(')[1].replace(')', '');
             const dateOnly = currentSelectedDate.split('(')[0].trim();
             headerDiv.innerHTML = `
-                <p class="text-xl font-bold text-blue-800">${dayOfWeek}</p>
-                <p class="text-3xl font-extrabold text-blue-900">${dateOnly}</p>
+                <p class="text-xl font-bold text-amber-100">${dayOfWeek}</p>
+                <p class="text-3xl font-extrabold text-amber-200">${dateOnly}</p>
             `;
             container.appendChild(headerDiv);
 
@@ -215,10 +216,10 @@
                 eventDiv.className = 'flex justify-between items-center py-3 border-b border-gray-700 last:border-b-0';
                 eventDiv.innerHTML = `
                     <div>
-                        <p class="font-bold text-base">${event.title}</p>
+                        <p class="font-bold text-base text-amber-100">${event.title}</p>
                         <p class="text-xs text-gray-500">${event.location}</p>
                     </div>
-                    <span class="font-bold text-lg text-blue-600">${event.time}</span>
+                    <span class="font-bold text-lg text-amber-500">${event.time}</span>
                 `;
                 listCard.appendChild(eventDiv);
             });
@@ -262,7 +263,7 @@
     <header class="border-b border-gray-700 sticky top-0 z-10 shadow-lg header-bg">
         <div class="max-w-xl mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <i data-lucide="church" class="w-8 h-8 text-amber-400"></i>
+                <i data-lucide="church" class="w-8 h-8 text-amber-100"></i>
                 <div>
                     <h1 class="text-xl font-bold text-amber-100">Paróquia</h1>
                     <p class="text-xs text-amber-400">Nossa Senhora da Conceição</p>
@@ -305,13 +306,13 @@
         <!-- SEÇÃO 2: INFORMAÇÕES (Inicialmente Escondida) -->
         <div id="info-section" class="hidden space-y-6">
             <div class="card rounded-xl shadow-lg p-5">
-                <h2 class="text-xl font-bold mb-3 text-blue-800 flex items-center gap-2"><i data-lucide="church" class="w-5 h-5"></i> Sobre a Paróquia</h2>
+                <h2 class="text-xl font-bold mb-3 text-amber-100 flex items-center gap-2"><i data-lucide="church" class="w-5 h-5 text-amber-400"></i> Sobre a Paróquia</h2>
                 <p class="text-sm text-gray-300 leading-relaxed">
                     A Paróquia Nossa Senhora da Conceição, em Virgínia/MG, foi criada em 15 de Novembro de 1866. Sua fundação remonta a 1856, quando o Padre Custódio de Oliveira Monte-Raso dedicou a capela à Virgem Santíssima, dando origem ao nome da cidade. É um farol de fé no Sul de Minas, comprometida com a Palavra de Deus e a caridade. Nossa missão é evangelizar e acolher a todos com amor fraterno.
                 </p>
             </div>
             <div class="card rounded-xl shadow-lg p-5">
-                <h2 class="text-xl font-bold mb-3 text-blue-800 flex items-center gap-2"><i data-lucide="clock" class="w-5 h-5"></i> Horário do Escritório Paroquial</h2>
+                <h2 class="text-xl font-bold mb-3 text-amber-100 flex items-center gap-2"><i data-lucide="clock" class="w-5 h-5 text-amber-400"></i> Horário do Escritório Paroquial</h2>
                 <div class="text-sm text-gray-300 space-y-2">
                     <div class="flex justify-between border-b border-gray-700 pb-1"><span class="font-bold">Segunda a Sexta:</span><span>08:00h – 17:00h</span></div>
                     <div class="flex justify-between"><span class="font-bold">Sábados e Domingos:</span><span>Fechado</span></div>
@@ -322,13 +323,13 @@
         <!-- SEÇÃO 3: CONTATOS (Inicialmente Escondida) -->
         <div id="contatos-section" class="hidden space-y-4">
             <div class="card rounded-xl shadow-lg p-5 space-y-4">
-                <h2 class="text-xl font-bold mb-3 text-blue-800 flex items-center gap-2"><i data-lucide="phone-call" class="w-5 h-5"></i> Escritório Paroquial</h2>
+                <h2 class="text-xl font-bold mb-3 text-amber-100 flex items-center gap-2"><i data-lucide="phone-call" class="w-5 h-5 text-amber-400"></i> Escritório Paroquial</h2>
                 
                 <!-- CORRIGIDO CONTRASTE: Fundos mais claros e texto do link mais visível -->
                 <a href="https://wa.me/553533731397" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-3 bg-green-400/20 hover:bg-green-300/20 rounded-lg transition-colors">
                     <i data-lucide="message-square" class="w-6 h-6 text-green-400"></i>
                     <div>
-                        <p class="font-bold text-sm text-blue-800">WhatsApp Oficial</p>
+                        <p class="font-bold text-sm text-amber-100">WhatsApp Oficial</p>
                         <p class="text-xs text-gray-400 contact-link-text">(35) 3373-1397</p>
                     </div>
                 </a>
@@ -337,7 +338,7 @@
                 <a href="https://www.instagram.com/aparoquia/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-3 bg-pink-400/20 hover:bg-pink-300/20 rounded-lg transition-colors">
                     <i data-lucide="instagram" class="w-6 h-6 text-pink-400"></i>
                     <div>
-                        <p class="font-bold text-sm text-blue-800">Instagram Oficial</p>
+                        <p class="font-bold text-sm text-amber-100">Instagram Oficial</p>
                         <p class="text-xs text-gray-400 contact-link-text">@aparoquia</p>
                     </div>
                 </a>
@@ -347,7 +348,7 @@
                 <a href="tel:+553532611217,8007" class="flex items-center gap-4 p-3 bg-blue-400/20 hover:bg-blue-300/20 rounded-lg transition-colors">
                     <i data-lucide="phone" class="w-6 h-6 text-blue-400"></i>
                     <div>
-                        <p class="font-bold text-sm text-blue-800">Telefone com Ramal</p>
+                        <p class="font-bold text-sm text-amber-100">Telefone com Ramal</p>
                         <p class="text-xs text-gray-400 contact-link-text">(35) 3261-1217 ramal 8007</p>
                     </div>
                 </a>
@@ -356,16 +357,16 @@
                 <a href="mailto:paroquiavirginia@yahoo.com.br" class="flex items-center gap-4 p-3 bg-red-400/20 hover:bg-red-300/20 rounded-lg transition-colors">
                     <i data-lucide="mail" class="w-6 h-6 text-red-400"></i>
                     <div>
-                        <p class="font-bold text-sm text-blue-800">E-mail Oficial</p>
+                        <p class="font-bold text-sm text-amber-100">E-mail Oficial</p>
                         <p class="text-xs text-gray-400 contact-link-text">paroquiavirginia@yahoo.com.br</p>
                     </div>
                 </a>
             </div>
 
             <div class="card rounded-xl shadow-lg p-5">
-                <h2 class="text-xl font-bold mb-3 text-blue-800 flex items-center gap-2"><i data-lucide="map-pin" class="w-5 h-5"></i> Localização</h2>
+                <h2 class="text-xl font-bold mb-3 text-amber-100 flex items-center gap-2"><i data-lucide="map-pin" class="w-5 h-5 text-amber-400"></i> Localização</h2>
                 <p class="text-sm text-gray-300">Praça Cônego Monte Raso, nº 304 - Centro<br>37465-000, Virgínia/MG</p>
-                <a href="https://www.google.com/maps/search/?api=1&query=Praça+Cônego+Monte+Raso,+304,+Virgínia+-+MG" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-amber-500">
+                <a href="https://www.google.com/maps/search/?api=1&query=Praça+Cônego+Monte+Raso,+304,+Virgínia+-+MG" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 text-sm font-bold text-amber-500 hover:text-amber-400">
                     Ver no Mapa <i data-lucide="external-link" class="w-4 h-4"></i>
                 </a>
             </div>
