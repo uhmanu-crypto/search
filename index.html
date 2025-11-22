@@ -12,7 +12,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Manifesto (PWA) embutido -->
-    <link rel="manifest" href="data:application/json;base64,eyJpY29ucyI6W3sic2l6ZXMiOiI1MTJ4NTEyIiwidHlwZSI6ImltYWdlL3BuZyIsInNyYyI6Imh0dHBzOi8vY2RuLWljb25zLXBuZy5mbGF0aWNsZWIuY29tLzUxMi8xMjExNC8xMjExNDIzMy5wbmcifV0sIm5hbWUiOiJBZ2VuZGEgQ29uY2VpXHUwMGU3XHUwMGUzbyIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwic3RhcnRfdXJsIjoiLiIsImJhY2tncm91bmRfY29sb3IiOiIjMGUxZjNjYSIsInRoZW1lX2NvbG9yIjoiIzFlM2NiOSIsIm9yaWVudGF0aW9uIjoicG9ydHJhaXQifQ==">
+    <link rel="manifest" href="data:application/json;base64,eyJpY29ucyI6W3sic2l6ZXMiOiI1MTJ4NTEyIiwidHlwZSI6ImltYWdlL3BuZyIsInNyYyI6Imh0dHBzOi8vY2RuLWljb25zLXBuZy5mbGF0aWNvbi5jb20vNTEyLzEyMTE0LzEyMTE0MjMzLnBuZyJ9XSwibmFtZSI6IkFnZW5kYSBDb25jZcfDo28iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsInN0YXJ0X3VybCI6Ii4iLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzBlMWYzY2EiLCJ0aGVtZV9jb2xvciI6IiMxZTNjYjkiLCJvcmllbnRhdGlvbiI6InBvcnRyYWl0In0=">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -447,21 +447,11 @@
         document.addEventListener('DOMContentLoaded', () => {
             getUniqueDates(); 
             switchTab('agenda'); 
-            // Esconde o loader quando o conteúdo estiver pronto
-            document.getElementById('loader-container').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('loader-container').classList.add('hidden');
-            }, 300);
         });
 
     </script>
 </head>
 <body class="min-h-screen flex flex-col">
-    <!-- LOADER/SPINNER -->
-    <div id="loader-container" class="fixed inset-0 bg-[#0f172a] flex items-center justify-center z-50 transition-opacity duration-300">
-        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-400"></div>
-    </div>
-
     <header class="border-b border-gray-700 sticky top-0 z-10 shadow-lg header-bg">
         <div class="max-w-xl mx-auto px-4 py-4 flex justify-between items-center">
             <!-- BLOCO ESQUERDO: NOME E LOGÓTIPO -->
@@ -480,7 +470,7 @@
             </div>
         </div>
         <!-- BARRA DE NAVEGAÇÃO POR ABAS -->
-        <div class="max-w-xl mx-auto px-4 flex justify-around border-t border-gray-700">
+        <div class="max-w-xl mx-auto px-4 flex justify-between border-t border-gray-700 overflow-x-auto whitespace-nowrap">
             <button id="agenda-btn" onclick="switchTab('agenda')" class="tab-button flex-1 py-3 text-sm flex justify-center items-center gap-2">
                 <i data-lucide="calendar-days" class="w-4 h-4"></i> Agenda
             </button>
