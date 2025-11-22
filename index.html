@@ -5,58 +5,76 @@
     <!-- Configuração PWA/Mobile para Ecrã Inteiro -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Paróquia Conceição</title>
-    <meta name="theme-color" content="#1e3a8a">
+    <meta name="theme-color" content="#1e293b">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Agenda Conceição">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Manifesto (PWA) embutido -->
-    <link rel="manifest" href="data:application/json;base64,eyJpY29ucyI6W3sic2l6ZXMiOiI1MTJ4NTEyIiwidHlwZSI6ImltYWdlL3BuZyIsInNyYyI6Imh0dHBzOi8vY2RuLWljb25zLXBuZy5mbGF0aWNvbi5jb20vNTEyLzEyMTE0LzEyMTE0MjMzLnBuZyJ9XSwibmFtZSI6IkFnZW5kYSBQYXJv%C3%B311%C3%BA3%C3%AD12%C3%BA5%C3%A3vcyIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwic3RhcnR0X3VybCI6Ii4iLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzFlM2E4YSIsInRoZW1lX2NvbG9yIjoiIzFlM2E4YSIsIm9yaWVudGF0aW9uIjoicG9ydHJhaXQifQ==">
+    <link rel="manifest" href="data:application/json;base64,eyJpY29ucyI6W3sic2l6ZXMiOiI1MTJ4NTEyIiwidHlwZSI6ImltYWdlL3BuZyIsInNyYyI6Imh0dHBzOi8vY2RuLWljb25zLXBuZy5mbGF0aWNvbi5jb20vNTEyLzEyMTE0LzEyMTE0MjMzLnBuZyJ9XSwibmFtZSI6IkFnZWVuZGEgQ29uY2Vpw6fDo28iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsInN0YXJ0X3VybCI6Ii4iLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzBlMWYzYyIsInRoZW1lX2NvbG9yIjoiIzFlM2E4YSIsIm9yaWVudGF0aW9uIjoicG9ydHJhaXQifQ==">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Estilos base para a Paróquia (Light Mode) */
-        body { font-family: 'Roboto', sans-serif; transition: background-color 0.3s, color 0.3s; }
-        .card { transition: background-color 0.3s, border-color 0.3s; }
-        .tab-button { transition: all 0.3s ease; border-bottom: 3px solid transparent; padding-bottom: 8px; }
-        .tab-button.active { border-color: #1e3a8a; font-weight: 700; color: #1e3a8a; }
-        
-        /* Tema Claro */
-        .light-mode { background-color: #f8fafc; color: #1e3a8a; }
-        .light-mode .card { background-color: #ffffff; border: 1px solid #e2e8f0; }
-        .light-mode .header-bg { background-color: #ffffff; }
-        .light-mode .tab-button { color: #64748b; }
-        .light-mode .tab-button.active { color: #1e3a8a; border-color: #1e3a8a; }
-
-        /* Tema Escuro */
-        .dark-mode { background-color: #0f172a; color: #93c5fd; }
-        .dark-mode .card { background-color: #1e293b; border: 1px solid #334155; color: #e2e8f0; }
-        .dark-mode .text-blue-800 { color: #93c5fd; }
-        .dark-mode .text-blue-600 { color: #60a5fa; }
-        .dark-mode .header-bg { background-color: #1e293b; border-color: #334155; }
-        .dark-mode .text-blue-900 { color: #dbeafe; }
-        .dark-mode .tab-button { color: #94a3b8; }
-        .dark-mode .tab-button.active { color: #60a5fa; border-color: #60a5fa; }
-        .dark-mode .text-gray-500 { color: #94a3b8; }
+        /* TEMA ESCURO FIXO */
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            background-color: #0f172a; /* Fundo Escuro */
+            color: #e2e8f0; /* Texto Claro */
+            transition: background-color 0.3s, color 0.3s; 
+        }
+        .card { 
+            background-color: #1e293b; /* Fundo dos cartões escuro */
+            border: 1px solid #334155; 
+            transition: background-color 0.3s, border-color 0.3s; 
+        }
+        .header-bg { 
+            background-color: #1e293b; 
+            border-color: #334155;
+        }
+        .tab-button { 
+            transition: all 0.3s ease; 
+            border-bottom: 3px solid transparent; 
+            padding-bottom: 8px; 
+            color: #94a3b8; /* Cor do texto das abas inativas */
+        }
+        .tab-button.active { 
+            border-color: #60a5fa; /* Borda da aba ativa (Azul Claro) */
+            font-weight: 700; 
+            color: #60a5fa; /* Cor do texto da aba ativa */
+        }
 
         /* Estilo para a Barra de Dias (Picker) */
         .date-picker-scroll { overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
         .date-picker-scroll::-webkit-scrollbar { display: none; }
-        .date-button { padding: 8px 16px; margin-right: 8px; border-radius: 9999px; font-weight: 700; border: 2px solid transparent; }
-        .light-mode .date-button { background-color: #e2e8f0; color: #475569; }
-        .light-mode .date-button.active { background-color: #1e3a8a; color: white; }
-        .dark-mode .date-button { background-color: #334155; color: #cbd5e1; }
-        .dark-mode .date-button.active { background-color: #60a5fa; color: #0f172a; }
+        .date-button { 
+            padding: 8px 16px; 
+            margin-right: 8px; 
+            border-radius: 9999px; 
+            font-weight: 700; 
+            border: 2px solid transparent; 
+            background-color: #334155; /* Fundo dos botões de data */
+            color: #cbd5e1; /* Texto dos botões de data */
+        }
+        .date-button.active { 
+            background-color: #60a5fa; /* Fundo do botão ativo (Azul Claro) */
+            color: #0f172a; /* Texto escuro do botão ativo */
+        }
+
+        /* Cores de Destaque no Dark Mode */
+        .text-blue-800 { color: #93c5fd; } /* Títulos de cartões */
+        .text-blue-900 { color: #dbeafe; } /* Títulos grandes */
+        .text-blue-600 { color: #60a5fa; } /* Horários e Links */
+        .text-gray-500 { color: #94a3b8; } /* Texto secundário */
 
         ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: var(--bg-color-scrollbar-track, #f1f1f1); }
-        ::-webkit-scrollbar-thumb { background: var(--bg-color-scrollbar-thumb, #94a3b8); border-radius: 4px; }
+        ::-webkit-scrollbar-track { background: #1e293b; }
+        ::-webkit-scrollbar-thumb { background: #64748b; border-radius: 4px; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col light-mode">
+<body class="min-h-screen flex flex-col">
     <!-- Dados da Agenda (Direto no Código) -->
     <script>
         // *** DADOS COMPLETOS E SEM NOME DE PADRES ***
@@ -103,22 +121,21 @@
             { "date": "30/Nov (Domingo)", "time": "19:00", "title": "Terceiro dia da Novena", "location": "Novena" }
         ];
 
-        let currentTab = 'agenda'; // Nova variável de estado para a aba
-        let currentSelectedDate = ''; // Armazena a data completa selecionada (ex: "24/Nov (Segunda-feira)")
-        let uniqueDates = []; // Lista de datas únicas para os botões
+        let currentTab = 'agenda'; 
+        let currentSelectedDate = ''; 
 
         function getUniqueDates() {
              const dates = AGENDA_DATA.map(item => item.date.trim());
              uniqueDates = [...new Set(dates)];
              if (currentSelectedDate === '' && uniqueDates.length > 0) {
-                 currentSelectedDate = uniqueDates[0]; // Seleciona o primeiro dia por padrão
+                 currentSelectedDate = uniqueDates[0]; 
              }
         }
         
         function renderDatePicker() {
             getUniqueDates();
             const container = document.getElementById('date-picker-container');
-            if (!container) return; // Se não estiver na aba Agenda, ignora
+            if (!container) return; 
             
             container.innerHTML = '';
             
@@ -136,6 +153,11 @@
                 button.onclick = () => selectDate(fullDate);
                 container.appendChild(button);
             });
+            // Rola a barra de dias para o botão ativo (o dia selecionado)
+            const activeBtn = container.querySelector('.date-button.active');
+            if (activeBtn) {
+                activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
         }
         
         function selectDate(fullDate) {
@@ -174,7 +196,7 @@
 
             filteredData.forEach(event => {
                 const eventDiv = document.createElement('div');
-                eventDiv.className = 'flex justify-between items-center py-3 border-b border-gray-100 last:border-b-0';
+                eventDiv.className = 'flex justify-between items-center py-3 border-b border-gray-700 last:border-b-0';
                 eventDiv.innerHTML = `
                     <div>
                         <p class="font-bold text-base">${event.title}</p>
@@ -207,63 +229,21 @@
 
             // Chamadas específicas de renderização
             if (tabName === 'agenda') {
-                renderDatePicker(); // Renderiza os botões do calendário
-                renderAgenda(); // Renderiza o conteúdo do dia
+                renderDatePicker(); 
+                renderAgenda(); 
             }
             lucide.createIcons();
         }
 
-
-        // --- Dark Mode Logic ---
-
-        function applyTheme(isDark) {
-            const body = document.body;
-            const themeIconContainer = document.getElementById('theme-icon');
-            
-            if (isDark) {
-                body.classList.remove('light-mode');
-                body.classList.add('dark-mode');
-                document.querySelector('meta[name="theme-color"]').setAttribute('content', '#1e293b');
-                themeIconContainer.innerHTML = '<i data-lucide="sun" class="w-5 h-5"></i>';
-            } else {
-                body.classList.remove('dark-mode');
-                body.classList.add('light-mode');
-                document.querySelector('meta[name="theme-color"]').setAttribute('content', '#1e3a8a');
-                themeIconContainer.innerHTML = '<i data-lucide="moon" class="w-5 h-5"></i>';
-            }
-            
-            // Re-renderiza o calendário para aplicar as cores do tema
-            if (currentTab === 'agenda') {
-                renderDatePicker();
-            }
-            lucide.createIcons(); 
-        }
-
-        function toggleTheme() {
-            const isDark = document.body.classList.contains('dark-mode');
-            localStorage.setItem('theme', isDark ? 'light' : 'dark');
-            applyTheme(!isDark);
-        }
-
-        function loadTheme() {
-            getUniqueDates(); // Primeiro carrega as datas
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                applyTheme(true);
-            } else {
-                applyTheme(false);
-            }
-        }
-        
         // Inicialização
         document.addEventListener('DOMContentLoaded', () => {
-            loadTheme(); // Inicia o carregamento do tema, que chama a renderização
-            switchTab('agenda'); // Define a aba inicial
+            getUniqueDates(); 
+            switchTab('agenda'); 
         });
 
     </script>
 
-    <header class="border-b border-gray-200 sticky top-0 z-10 shadow-lg header-bg">
+    <header class="border-b border-gray-700 sticky top-0 z-10 shadow-lg header-bg">
         <div class="max-w-xl mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center gap-3">
                 <i data-lucide="church" class="text-blue-800 w-8 h-8"></i>
@@ -272,20 +252,17 @@
                     <p class="text-xs text-blue-600">Nossa Senhora da Conceição</p>
                 </div>
             </div>
-            <!-- Botão de Modo Escuro/Claro -->
-            <button onclick="toggleTheme()" class="p-2 rounded-full text-blue-800 hover:text-blue-600 active:scale-95 transition-transform" id="theme-icon">
-                 <!-- Icone inserido por JS -->
-            </button>
+            <!-- Botão Removido -->
         </div>
         <!-- BARRA DE NAVEGAÇÃO POR ABAS -->
-        <div class="max-w-xl mx-auto px-4 flex justify-around border-t border-gray-100">
-            <button id="agenda-btn" onclick="switchTab('agenda')" class="tab-button flex-1 py-3 text-sm flex justify-center items-center gap-2 text-gray-500">
+        <div class="max-w-xl mx-auto px-4 flex justify-around border-t border-gray-700">
+            <button id="agenda-btn" onclick="switchTab('agenda')" class="tab-button flex-1 py-3 text-sm flex justify-center items-center gap-2">
                 <i data-lucide="calendar-days" class="w-4 h-4"></i> Agenda
             </button>
-            <button id="info-btn" onclick="switchTab('info')" class="tab-button flex-1 py-3 text-sm flex justify-center items-center gap-2 text-gray-500">
+            <button id="info-btn" onclick="switchTab('info')" class="tab-button flex-1 py-3 text-sm flex justify-center items-center gap-2">
                 <i data-lucide="info" class="w-4 h-4"></i> Informações
             </button>
-            <button id="contatos-btn" onclick="switchTab('contatos')" class="tab-button flex-1 py-3 text-sm flex justify-center items-center gap-2 text-gray-500">
+            <button id="contatos-btn" onclick="switchTab('contatos')" class="tab-button flex-1 py-3 text-sm flex justify-center items-center gap-2">
                 <i data-lucide="phone" class="w-4 h-4"></i> Contatos
             </button>
         </div>
@@ -296,7 +273,7 @@
         <div id="agenda-section">
             <!-- BARRA DE SELEÇÃO DE DIAS (CALENDÁRIO) -->
             <div class="mb-6">
-                <h2 class="text-sm font-bold mb-3 text-gray-600 flex items-center gap-2"><i data-lucide="calendar-check" class="w-4 h-4"></i>Selecione o Dia</h2>
+                <h2 class="text-sm font-bold mb-3 text-gray-500 flex items-center gap-2"><i data-lucide="calendar-check" class="w-4 h-4"></i>Selecione o Dia</h2>
                 <div id="date-picker-container" class="date-picker-scroll flex pb-2">
                     <!-- Botões dos dias injetados pelo JavaScript -->
                 </div>
@@ -306,21 +283,21 @@
             <div id="agenda-content" class="space-y-4">
                 <!-- Conteúdo injetado pelo JavaScript -->
             </div>
-            <p class="mt-8 text-center text-xs text-gray-400">Paróquia Nossa Senhora da Conceição - Diocese da Campanha - Minas Gerais</p>
+            <p class="mt-8 text-center text-xs text-gray-500">Paróquia Nossa Senhora da Conceição - Diocese da Campanha - Minas Gerais</p>
         </div>
 
         <!-- SEÇÃO 2: INFORMAÇÕES (Inicialmente Escondida) -->
         <div id="info-section" class="hidden space-y-6">
             <div class="card rounded-xl shadow-lg p-5">
                 <h2 class="text-xl font-bold mb-3 text-blue-800 flex items-center gap-2"><i data-lucide="church" class="w-5 h-5"></i> Sobre a Paróquia</h2>
-                <p class="text-sm text-gray-600 leading-relaxed">
+                <p class="text-sm text-gray-300 leading-relaxed">
                     A Paróquia Nossa Senhora da Conceição, em Virgínia/MG, foi criada em 15 de Novembro de 1866. Sua fundação remonta a 1856, quando o Padre Custódio de Oliveira Monte-Raso dedicou a capela à Virgem Santíssima, dando origem ao nome da cidade. É um farol de fé no Sul de Minas, comprometida com a Palavra de Deus e a caridade. Nossa missão é evangelizar e acolher a todos com amor fraterno.
                 </p>
             </div>
             <div class="card rounded-xl shadow-lg p-5">
                 <h2 class="text-xl font-bold mb-3 text-blue-800 flex items-center gap-2"><i data-lucide="clock" class="w-5 h-5"></i> Horário do Escritório Paroquial</h2>
-                <div class="text-sm text-gray-600 space-y-2">
-                    <div class="flex justify-between border-b border-gray-100 pb-1"><span class="font-bold">Segunda a Sexta:</span><span>08:00h – 17:00h</span></div>
+                <div class="text-sm text-gray-300 space-y-2">
+                    <div class="flex justify-between border-b border-gray-700 pb-1"><span class="font-bold">Segunda a Sexta:</span><span>08:00h – 17:00h</span></div>
                     <div class="flex justify-between"><span class="font-bold">Sábados e Domingos:</span><span>Fechado</span></div>
                 </div>
             </div>
@@ -331,52 +308,52 @@
             <div class="card rounded-xl shadow-lg p-5 space-y-4">
                 <h2 class="text-xl font-bold mb-3 text-blue-800 flex items-center gap-2"><i data-lucide="phone-call" class="w-5 h-5"></i> Escritório Paroquial</h2>
                 
-                <a href="https://wa.me/553533731397" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-3 bg-green-50 hover:bg-green-100 rounded-lg transition-colors">
-                    <i data-lucide="message-square" class="w-6 h-6 text-green-600"></i>
+                <a href="https://wa.me/553533731397" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-3 bg-green-900/40 hover:bg-green-800/40 rounded-lg transition-colors">
+                    <i data-lucide="message-square" class="w-6 h-6 text-green-400"></i>
                     <div>
                         <p class="font-bold text-sm text-blue-800">WhatsApp Oficial</p>
-                        <p class="text-xs text-gray-500">(35) 3373-1397</p>
+                        <p class="text-xs text-gray-400">(35) 3373-1397</p>
                     </div>
                 </a>
                 
                 <!-- NOVO ITEM: INSTAGRAM -->
-                <a href="https://www.instagram.com/aparoquia/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-3 bg-pink-50 hover:bg-pink-100 rounded-lg transition-colors">
-                    <i data-lucide="instagram" class="w-6 h-6 text-pink-600"></i>
+                <a href="https://www.instagram.com/aparoquia/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-3 bg-pink-900/40 hover:bg-pink-800/40 rounded-lg transition-colors">
+                    <i data-lucide="instagram" class="w-6 h-6 text-pink-400"></i>
                     <div>
                         <p class="font-bold text-sm text-blue-800">Instagram Oficial</p>
-                        <p class="text-xs text-gray-500">@aparoquia</p>
+                        <p class="text-xs text-gray-400">@aparoquia</p>
                     </div>
                 </a>
 
 
-                <a href="tel:+553532611217,8007" class="flex items-center gap-4 p-3 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors">
-                    <i data-lucide="phone" class="w-6 h-6 text-blue-600"></i>
+                <a href="tel:+553532611217,8007" class="flex items-center gap-4 p-3 bg-blue-900/40 hover:bg-blue-800/40 rounded-lg transition-colors">
+                    <i data-lucide="phone" class="w-6 h-6 text-blue-400"></i>
                     <div>
                         <p class="font-bold text-sm text-blue-800">Telefone com Ramal</p>
-                        <p class="text-xs text-gray-500">(35) 3261-1217 ramal 8007</p>
+                        <p class="text-xs text-gray-400">(35) 3261-1217 ramal 8007</p>
                     </div>
                 </a>
 
-                <a href="mailto:paroquiavirginia@yahoo.com.br" class="flex items-center gap-4 p-3 bg-red-50 hover:bg-red-100 rounded-lg transition-colors">
-                    <i data-lucide="mail" class="w-6 h-6 text-red-600"></i>
+                <a href="mailto:paroquiavirginia@yahoo.com.br" class="flex items-center gap-4 p-3 bg-red-900/40 hover:bg-red-800/40 rounded-lg transition-colors">
+                    <i data-lucide="mail" class="w-6 h-6 text-red-400"></i>
                     <div>
                         <p class="font-bold text-sm text-blue-800">E-mail Oficial</p>
-                        <p class="text-xs text-gray-500">paroquiavirginia@yahoo.com.br</p>
+                        <p class="text-xs text-gray-400">paroquiavirginia@yahoo.com.br</p>
                     </div>
                 </a>
             </div>
 
             <div class="card rounded-xl shadow-lg p-5">
                 <h2 class="text-xl font-bold mb-3 text-blue-800 flex items-center gap-2"><i data-lucide="map-pin" class="w-5 h-5"></i> Localização</h2>
-                <p class="text-sm text-gray-600">Praça Cônego Monte Raso, nº 304 - Centro<br>37465-000, Virgínia/MG</p>
-                <a href="https://www.google.com/maps/search/?api=1&query=Praça+Cônego+Monte+Raso,+304,+Virgínia+-+MG" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-700">
+                <p class="text-sm text-gray-300">Praça Cônego Monte Raso, nº 304 - Centro<br>37465-000, Virgínia/MG</p>
+                <a href="https://www.google.com/maps/search/?api=1&query=Praça+Cônego+Monte+Raso,+304,+Virgínia+-+MG" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 text-sm font-bold text-blue-400 hover:text-blue-500">
                     Ver no Mapa <i data-lucide="external-link" class="w-4 h-4"></i>
                 </a>
             </div>
         </div>
     </main>
     
-    <footer class="text-center py-4 text-xs text-gray-500 border-t border-gray-200 mt-auto header-bg">
+    <footer class="text-center py-4 text-xs text-gray-500 border-t border-gray-700 mt-auto header-bg">
         Desenvolvido por Emanuel Uchôas
     </footer>
 </body>
