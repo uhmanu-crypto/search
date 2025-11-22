@@ -1,72 +1,192 @@
-[
-  {
-    "date": "01/Nov",
-    "time": "09:00",
-    "title": "Casamento - Igreja Matriz",
-    "location": "Igreja Matriz",
-    "priest": "Pe. Aylton"
-  },
-  {
-    "date": "01/Nov",
-    "time": "10:00",
-    "title": "Benção bairro Marques",
-    "location": "bairro Marques",
-    "priest": "Pe. Erick"
-  },
-  {
-    "date": "01/Nov",
-    "time": "11:00",
-    "title": "Casamento - Igreja Matriz",
-    "location": "Igreja Matriz",
-    "priest": "Pe. Aylton"
-  },
-  {
-    "date": "01/Nov",
-    "time": "14:00",
-    "title": "Catequese - Igreja Matriz",
-    "location": "Igreja Matriz",
-    "priest": "Pe. Erick"
-  },
-  {
-    "date": "01/Nov",
-    "time": "16:00",
-    "title": "Santa Missa Igreja Matriz",
-    "location": "Igreja Matriz",
-    "priest": "Pe. Edimilson"
-  },
-  {
-    "date": "01/Nov",
-    "time": "18:00",
-    "title": "Vigília - Igreja Matriz",
-    "location": "Igreja Matriz",
-    "priest": "Pe. Edimilson"
-  },
-  {
-    "date": "01/Nov",
-    "time": "19:00",
-    "title": "Santa Missa Igreja Matriz",
-    "location": "Igreja Matriz",
-    "priest": "Pe. Erick"
-  },
-  {
-    "date": "02/Nov (Domingo)",
-    "time": "05:00",
-    "title": "Santa Missa no Cemitério",
-    "location": "Cemitério",
-    "priest": "Pe. Erick"
-  },
-  {
-    "date": "02/Nov (Domingo)",
-    "time": "08:00",
-    "title": "Santa Missa Setor 6",
-    "location": "Bairro São José da Mantiqueira",
-    "priest": "Pe. Erick"
-  },
-  {
-    "date": "02/Nov (Domingo)",
-    "time": "09:00",
-    "title": "Santa Missa Igreja Matriz",
-    "location": "Igreja Matriz",
-    "priest": "Pe. Edimilson"
-  }
-]
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <!-- Configuração PWA/Mobile para Ecrã Inteiro -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>N. Sra. da Conceição</title>
+    <meta name="theme-color" content="#1e3a8a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Paróquia Conceição">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="data:application/json;base64,eyJpY29ucyI6W3sic2l6ZXMiOiI1MTJ4NTEyIiwidHlwZSI6ImltYWdlL3BuZyIsInNyYyI6Imh0dHBzOi8vY2RuLWljb25zLXBuZy5mbGF0aWNvbi5jb20vNTEyLzEyMTE0LzEyMTE0MjMzLnBuZyJ9XSwibmFtZSI6IlBhcsOzcXVpYSBOIFNyYSBkYSBDb25jZWnnw6NvIiwic2hvcnRfbmFtZSI6IkNvbmNlaSnnw6NvIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJzdGFydF91cmwiOiIuIiwiYmFja2dyb3VuZF9jb2xvciI6IiMxZTNhOGEiLCJ0aGVtZV9jb2xvciI6IiMxZTNhOGEiLCJvcmllbnRhdGlvbiI6InBvcnRyYWl0In0=">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos e Cores para N. Sra. da Conceição (Azul e Branco) */
+        body { font-family: 'Roboto', sans-serif; background-color: #f8fafc; color: #1e3a8a; }
+        .tab-button { transition: all 0.3s ease; border-bottom: 3px solid transparent; padding-bottom: 8px; }
+        .tab-button.active { border-color: #1e3a8a; font-weight: 700; color: #1e3a8a; }
+        .card { background-color: #ffffff; border: 1px solid #e2e8f0; }
+        .shadow-parish { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06), 0 0 0 4px rgba(30, 58, 138, 0.1); }
+        .agenda-header { background-color: #eff6ff; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Dados da Agenda de Novembro (Direto no Código) -->
+    <script>
+        const AGENDA_DATA = [
+            { "date": "01/Nov (Sábado)", "time": "09:00", "title": "Casamento - Igreja Matriz", "location": "Igreja Matriz", "priest": "Pe. Aylton" },
+            { "date": "01/Nov (Sábado)", "time": "10:00", "title": "Benção bairro Marques", "location": "Bairro Marques", "priest": "Pe. Erick" },
+            { "date": "01/Nov (Sábado)", "time": "11:00", "title": "Casamento - Igreja Matriz", "location": "Igreja Matriz", "priest": "Pe. Aylton" },
+            { "date": "01/Nov (Sábado)", "time": "14:00", "title": "Catequese - Igreja Matriz", "location": "Igreja Matriz", "priest": "Pe. Erick" },
+            { "date": "01/Nov (Sábado)", "time": "16:00", "title": "Santa Missa Igreja Matriz", "location": "Igreja Matriz", "priest": "Pe. Edimilson" },
+            { "date": "02/Nov (Domingo)", "time": "05:00", "title": "Santa Missa no Cemitério (Finados)", "location": "Cemitério", "priest": "Pe. Erick" },
+            { "date": "02/Nov (Domingo)", "time": "08:00", "title": "Santa Missa Setor 6", "location": "Bairro São José da Mantiqueira", "priest": "Pe. Erick" },
+            { "date": "02/Nov (Domingo)", "time": "09:00", "title": "Santa Missa Igreja Matriz", "location": "Igreja Matriz", "priest": "Pe. Edimilson" },
+            { "date": "02/Nov (Domingo)", "time": "11:00", "title": "Santa Missa Setor 1", "location": "Bairro Mendes", "priest": "Pe. Edimilson" },
+            { "date": "02/Nov (Domingo)", "time": "17:00", "title": "Santa Missa Setor 3", "location": "Bairro Corrêias", "priest": "Pe. Erick" },
+            { "date": "03/Nov (Segunda)", "time": "14:00", "title": "Visita às Obras", "location": "Vários Locais", "priest": "Pe. Erick" },
+            { "date": "03/Nov (Segunda)", "time": "19:00", "title": "Santa Missa", "location": "Igreja Nossa Senhora Aparecida", "priest": "Pe. Erick" },
+            { "date": "04/Nov (Terça)", "time": "19:00", "title": "Santa Missa Setor 5", "location": "Bairro Morangal", "priest": "Pe. Edimilson" },
+            { "date": "05/Nov (Quarta)", "time": "19:00", "title": "Santa Missa Setor 7", "location": "Bairro Serra Verde", "priest": "Pe. Edimilson" },
+            { "date": "06/Nov (Quinta)", "time": "19:00", "title": "Santa Missa Setor 2", "location": "Bairro Porto", "priest": "Pe. Edimilson" },
+            { "date": "07/Nov (Sexta)", "time": "19:00", "title": "Santa Missa Igreja Matriz", "location": "Igreja Matriz", "priest": "Pe. Edimilson" },
+            { "date": "08/Nov (Sábado)", "time": "19:00", "title": "Santa Missa Setor 5", "location": "Bairro Marques", "priest": "Pe. Erick" },
+            { "date": "09/Nov (Domingo)", "time": "10:00", "title": "Batizado", "location": "Igreja Matriz", "priest": "Pe. Erick" },
+            { "date": "10/Nov (Segunda)", "time": "19:00", "title": "Santa Missa Setor 5", "location": "Bairro Pouso Frio", "priest": "Pe. Erick" },
+            { "date": "15/Nov (Sábado)", "time": "19:00", "title": "Aniversário da Paróquia", "location": "Igreja Matriz", "priest": "Pe. Erick" }
+        ];
+
+        // Dados de Exemplo para o Mural (Fotos e Atualizações)
+        const MURAL_DATA = [
+            { "title": "Dia da Padroeira", "caption": "Grande celebração em honra à Nossa Senhora da Conceição. Venha participar da novena!", "imageUrl": "https://placehold.co/400x200/5e35b1/fff?text=NOSSA+SENHORA", "date": "08/Dez" },
+            { "title": "Mutirão de Limpeza", "caption": "Agradecemos a todos que ajudaram na limpeza da Igreja no último sábado. A comunidade unida!", "imageUrl": "https://placehold.co/400x200/93c5fd/1e3a8a?text=MUTIRAO+LIMPEZA", "date": "12/Nov" },
+            { "title": "Avisos Paroquiais", "caption": "A Catequese está aberta para novas inscrições na secretaria paroquial.", "imageUrl": "https://placehold.co/400x200/60a5fa/1e3a8a?text=CATEQUESE", "date": "05/Nov" }
+        ];
+
+        let currentTab = 'agenda'; // Estado inicial
+
+        function renderAgenda(data) {
+            const container = document.getElementById('agenda-content');
+            container.innerHTML = ''; // Limpa o conteúdo
+            const grouped = data.reduce((acc, item) => {
+                const day = item.date.split('(')[0].trim();
+                if (!acc[day]) acc[day] = [];
+                acc[day].push(item);
+                return acc;
+            }, {});
+
+            for (const day in grouped) {
+                const dayContainer = document.createElement('div');
+                dayContainer.className = 'mb-6 p-4 card rounded-xl shadow-md';
+                
+                // Cabeçalho do Dia (Sábado/Domingo)
+                const dayHeader = document.createElement('h3');
+                dayHeader.className = 'font-bold text-lg border-b border-blue-100 pb-2 mb-3 text-blue-800';
+                dayHeader.innerHTML = `<i data-lucide="calendar-check" class="w-5 h-5 inline-block mr-2 text-blue-600"></i>${day}`;
+                dayContainer.appendChild(dayHeader);
+
+                // Lista de Eventos do Dia
+                grouped[day].forEach(event => {
+                    const eventDiv = document.createElement('div');
+                    eventDiv.className = 'flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0';
+                    eventDiv.innerHTML = `
+                        <div>
+                            <p class="font-bold text-sm">${event.title}</p>
+                            <p class="text-xs text-gray-500">${event.location} • ${event.priest}</p>
+                        </div>
+                        <span class="font-bold text-base text-blue-600">${event.time}</span>
+                    `;
+                    dayContainer.appendChild(eventDiv);
+                });
+                container.appendChild(dayContainer);
+            }
+            lucide.createIcons(); // Re-renderizar ícones
+        }
+
+        function renderMural(data) {
+            const container = document.getElementById('mural-content');
+            container.innerHTML = ''; // Limpa o conteúdo
+            
+            data.forEach(post => {
+                const postDiv = document.createElement('div');
+                postDiv.className = 'mb-6 card rounded-xl shadow-md overflow-hidden';
+                postDiv.innerHTML = `
+                    <div class="h-48 w-full bg-gray-200 overflow-hidden relative">
+                        <!-- Imagem do Mural/Atualização -->
+                        <img src="${post.imageUrl}" alt="Imagem da atualização" class="w-full h-full object-cover">
+                        <span class="absolute top-3 right-3 bg-white text-blue-800 text-xs font-bold px-3 py-1 rounded-full shadow-lg">${post.date}</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1">${post.title}</h3>
+                        <p class="text-sm text-gray-600">${post.caption}</p>
+                    </div>
+                `;
+                container.appendChild(postDiv);
+            });
+        }
+
+        function switchTab(tabName) {
+            currentTab = tabName;
+            
+            // Gerenciar Botões
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(`${tabName}-btn`).classList.add('active');
+
+            // Gerenciar Conteúdo
+            document.getElementById('agenda-content').classList.add('hidden');
+            document.getElementById('mural-content').classList.add('hidden');
+            document.getElementById(`${tabName}-content`).classList.remove('hidden');
+
+            // Renderizar o conteúdo
+            if (tabName === 'agenda') {
+                renderAgenda(AGENDA_DATA);
+            } else if (tabName === 'mural') {
+                renderMural(MURAL_DATA);
+            }
+        }
+        
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            switchTab('agenda'); // Inicia na aba Agenda
+        });
+
+    </script>
+
+    <header class="border-b border-gray-200 bg-white sticky top-0 z-10 shadow-lg shadow-blue-50/50">
+        <div class="max-w-xl mx-auto px-4 py-4 flex items-center gap-3">
+            <i data-lucide="church" class="text-blue-800 w-8 h-8"></i>
+            <div>
+                <h1 class="text-xl font-bold text-blue-900">Paróquia</h1>
+                <p class="text-xs text-blue-600">Nossa Senhora da Conceição</p>
+            </div>
+        </div>
+        <div class="max-w-xl mx-auto px-4 flex justify-around border-t border-gray-100">
+            <button id="agenda-btn" onclick="switchTab('agenda')" class="tab-button flex-1 py-3 text-sm text-gray-500 flex justify-center items-center gap-2">
+                <i data-lucide="calendar-days" class="w-4 h-4"></i> Agenda
+            </button>
+            <button id="mural-btn" onclick="switchTab('mural')" class="tab-button flex-1 py-3 text-sm text-gray-500 flex justify-center items-center gap-2">
+                <i data-lucide="images" class="w-4 h-4"></i> Mural & Fotos
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-xl mx-auto px-4 py-6 w-full">
+        <!-- Conteúdo da Agenda (Visível por Padrão) -->
+        <div id="agenda-content" class="space-y-4">
+            <!-- Conteúdo injetado pelo JavaScript -->
+        </div>
+
+        <!-- Conteúdo do Mural (Escondido por Padrão) -->
+        <div id="mural-content" class="space-y-4 hidden">
+            <!-- Conteúdo injetado pelo JavaScript -->
+        </div>
+
+        <p class="mt-8 text-center text-xs text-gray-400">Dados de Novembro 2025 pré-carregados para visualização instantânea.</p>
+    </main>
+    
+    <footer class="text-center py-4 text-xs text-gray-500 border-t border-gray-200 mt-auto">
+        Desenvolvido para N. Sra. da Conceição | App PWA
+    </footer>
+</body>
+</html>
