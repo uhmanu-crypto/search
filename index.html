@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <!-- Configuração PWA/Mobile para Ecrã Inteiro -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>N. Sra. da Conceição</title>
+    <title>Paróquia Conceição</title>
     <meta name="theme-color" content="#1e3a8a">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="Paróquia Conceição">
+    <meta name="apple-mobile-web-app-title" content="Agenda Conceição">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="manifest" href="data:application/json;base64,eyJpY29ucyI6W3sic2l6ZXMiOiI1MTJ4NTEyIiwidHlwZSI6ImltYWdlL3BuZyIsInNyYyI6Imh0dHBzOi8vY2RuLWljb25zLXBuZy5mbGF0aWNvbi5jb20vNTEyLzEyMTE0LzEyMTE0MjMzLnBuZyJ9XSwibmFtZSI6IlBhcsOzcXVpYSBOIFNyYSBkYSBDb25jZWnnw6NvIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJzdGFydF91cmwiOiIuIiwiYmFja2dyb3VuZF9jb2xvciI6IiMxZTNhOGEiLCJ0aGVtZV9jb2xvciI6IiMxZTNhOGEiLCJvcmllbnRhdGlvbiI6InBvcnRyYWl0In0=">
+    <!-- Manifesto (PWA) embutido -->
+    <link rel="manifest" href="data:application/json;base64,eyJpY29ucyI6W3sic2l6ZXMiOiI1MTJ4NTEyIiwidHlwZSI6ImltYWdlL3BuZyIsInNyYyI6Imh0dHBzOi8vY2RuLWljb25zLXBuZy5mbGF0aWNvbi5jb20vNTEyLzEyMTE0LzEyMTE0MjMzLnBuZyJ9XSwibmFtZSI6IkFnZW5kYSBQYXJv%C3%B311%C3%BA3%C3%AD12%C3%BA5%C3%A3vcyIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwic3RhcnRfdXJsIjoiLiIsImJhY2tncm91bmRfY29sb3IiOiIjMWUzYThhIiwidGhlbWVfY29sb3IiOiIjMWUzYThhIiwib3JpZW50YXRpb24iOiJwb3J0cmFpdCJ9">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -19,38 +20,36 @@
     <style>
         /* Estilos base para a Paróquia (Light Mode) */
         body { font-family: 'Roboto', sans-serif; transition: background-color 0.3s, color 0.3s; }
+        .card { transition: background-color 0.3s, border-color 0.3s; }
         .tab-button { transition: all 0.3s ease; border-bottom: 3px solid transparent; padding-bottom: 8px; }
         .tab-button.active { border-color: #1e3a8a; font-weight: 700; color: #1e3a8a; }
-        .card { transition: background-color 0.3s, border-color 0.3s; }
         
         /* Tema Claro */
-        .light-mode {
-            background-color: #f8fafc; /* slate-50 */
-            color: #1e3a8a; /* blue-800 */
-        }
-        .light-mode .card {
-            background-color: #ffffff;
-            border: 1px solid #e2e8f0; /* slate-200 */
-        }
+        .light-mode { background-color: #f8fafc; color: #1e3a8a; }
+        .light-mode .card { background-color: #ffffff; border: 1px solid #e2e8f0; }
         .light-mode .header-bg { background-color: #ffffff; }
+        .light-mode .tab-button { color: #64748b; }
+        .light-mode .tab-button.active { color: #1e3a8a; border-color: #1e3a8a; }
 
         /* Tema Escuro */
-        .dark-mode {
-            background-color: #0f172a; /* slate-900 */
-            color: #93c5fd; /* blue-300 */
-        }
-        .dark-mode .tab-button.active { border-color: #60a5fa; color: #60a5fa; }
-        .dark-mode .card {
-            background-color: #1e293b; /* slate-800 */
-            border: 1px solid #334155; /* slate-700 */
-            color: #e2e8f0; /* slate-200 */
-        }
-        .dark-mode .text-gray-500 { color: #94a3b8; }
-        .dark-mode .text-gray-600 { color: #cbd5e1; }
+        .dark-mode { background-color: #0f172a; color: #93c5fd; }
+        .dark-mode .card { background-color: #1e293b; border: 1px solid #334155; color: #e2e8f0; }
         .dark-mode .text-blue-800 { color: #93c5fd; }
         .dark-mode .text-blue-600 { color: #60a5fa; }
         .dark-mode .header-bg { background-color: #1e293b; border-color: #334155; }
-        .dark-mode .border-gray-100 { border-color: #1e293b; }
+        .dark-mode .text-blue-900 { color: #dbeafe; }
+        .dark-mode .tab-button { color: #94a3b8; }
+        .dark-mode .tab-button.active { color: #60a5fa; border-color: #60a5fa; }
+        .dark-mode .text-gray-500 { color: #94a3b8; }
+
+        /* Estilo para a Barra de Dias (Picker) */
+        .date-picker-scroll { overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
+        .date-picker-scroll::-webkit-scrollbar { display: none; }
+        .date-button { padding: 8px 16px; margin-right: 8px; border-radius: 9999px; font-weight: 700; border: 2px solid transparent; }
+        .light-mode .date-button { background-color: #e2e8f0; color: #475569; }
+        .light-mode .date-button.active { background-color: #1e3a8a; color: white; }
+        .dark-mode .date-button { background-color: #334155; color: #cbd5e1; }
+        .dark-mode .date-button.active { background-color: #60a5fa; color: #0f172a; }
 
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: var(--bg-color-scrollbar-track, #f1f1f1); }
@@ -62,11 +61,10 @@
     <script>
         // *** DADOS COMPLETOS E SEM NOME DE PADRES ***
         const AGENDA_DATA = [
-            // EVENTOS DE 24 A 30 DE NOVEMBRO (CORRIGIDOS E SEM INFORMAÇÃO SECRETA)
-            { "date": "24/Nov (Segunda-feira)", "time": "--", "title": "Folga", "location": "Folga" }, // CORRIGIDO: Folga com '--'
-            // Removido: Visita às Obras
-            { "date": "24/Nov (Segunda-feira)", "time": "18:00", "title": "Santa Missa Sagrado Coração", "location": "Igreja Sagrado Coração" }, // CORRIGIDO: 19:00 -> 18:00
-            { "date": "24/Nov (Segunda-feira)", "time": "19:00", "title": "Formação MESC", "location": "Formação MESC" }, // CORRIGIDO: 20:00 -> 19:00
+            // EVENTOS DE 24 A 30 DE NOVEMBRO
+            { "date": "24/Nov (Segunda-feira)", "time": "--", "title": "Folga", "location": "Folga" },
+            { "date": "24/Nov (Segunda-feira)", "time": "18:00", "title": "Santa Missa Sagrado Coração", "location": "Igreja Sagrado Coração" },
+            { "date": "24/Nov (Segunda-feira)", "time": "19:00", "title": "Formação MESC", "location": "Formação MESC" },
 
             { "date": "25/Nov (Terça-feira)", "time": "09:00", "title": "Atendimento", "location": "Atendimento" },
             { "date": "25/Nov (Terça-feira)", "time": "14:00", "title": "Atendimento", "location": "Atendimento" },
@@ -105,127 +103,139 @@
             { "date": "30/Nov (Domingo)", "time": "19:00", "title": "Terceiro dia da Novena", "location": "Novena" }
         ];
 
-        // Dados de Exemplo para o Mural (Fotos e Atualizações)
-        const MURAL_DATA = [
-            { "title": "Dia da Padroeira", "caption": "Grande celebração em honra à Nossa Senhora da Conceição. Venha participar da novena!", "imageUrl": "https://placehold.co/400x200/5e35b1/fff?text=NOSSA+SENHORA", "date": "08/Dez" },
-            { "title": "Dica de Edição", "caption": "Para trocar esta foto, use o link direto de uma imagem (pode ser do Instagram).", "imageUrl": "https://placehold.co/400x200/93c5fd/1e3a8a?text=LINK+INSTAGRAM", "date": "Hoje" },
-            { "title": "Avisos Importantes", "caption": "A Catequese está aberta para novas inscrições na secretaria paroquial.", "imageUrl": "https://placehold.co/400x200/60a5fa/1e3a8a?text=CATEQUESE", "date": "05/Nov" }
-        ];
+        let currentTab = 'agenda'; // Nova variável de estado para a aba
+        let currentSelectedDate = ''; // Armazena a data completa selecionada (ex: "24/Nov (Segunda-feira)")
+        let uniqueDates = []; // Lista de datas únicas para os botões
 
-        let currentTab = 'agenda'; // Estado inicial
-
-        function renderAgenda(data) {
-            const container = document.getElementById('agenda-content');
-            container.innerHTML = ''; // Limpa o conteúdo
-            const grouped = data.reduce((acc, item) => {
-                // Obtém apenas o dia e a data para agrupar (Ex: 24/Nov (Segunda-feira))
-                const fullDayDate = item.date.trim();
-                if (!acc[fullDayDate]) acc[fullDayDate] = [];
-                acc[fullDayDate].push(item);
-                return acc;
-            }, {});
-
-            for (const fullDayDate in grouped) {
-                const dayContainer = document.createElement('div');
-                dayContainer.className = 'mb-6 p-4 card rounded-xl shadow-md';
-                
-                // Cabeçalho do Dia (Exibe data e dia da semana completo)
-                const dayHeader = document.createElement('h3');
-                dayHeader.className = 'font-bold text-lg border-b border-blue-100 pb-2 mb-3 text-blue-800';
-                dayHeader.innerHTML = `<i data-lucide="calendar-check" class="w-5 h-5 inline-block mr-2 text-blue-600"></i>${fullDayDate}`;
-                dayContainer.appendChild(dayHeader);
-
-                // Lista de Eventos do Dia
-                grouped[fullDayDate].forEach(event => {
-                    const eventDiv = document.createElement('div');
-                    eventDiv.className = 'flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0';
-                    eventDiv.innerHTML = `
-                        <div>
-                            <p class="font-bold text-sm">${event.title}</p>
-                            <p class="text-xs text-gray-500">${event.location}</p>
-                        </div>
-                        <span class="font-bold text-base text-blue-600">${event.time}</span>
-                    `;
-                    dayContainer.appendChild(eventDiv);
-                });
-                container.appendChild(dayContainer);
-            }
-            lucide.createIcons(); // Re-renderizar ícones
+        function getUniqueDates() {
+             const dates = AGENDA_DATA.map(item => item.date.trim());
+             uniqueDates = [...new Set(dates)];
+             if (currentSelectedDate === '' && uniqueDates.length > 0) {
+                 currentSelectedDate = uniqueDates[0]; // Seleciona o primeiro dia por padrão
+             }
         }
-
-        function renderMural(data) {
-            const container = document.getElementById('mural-content');
-            container.innerHTML = ''; // Limpa o conteúdo
+        
+        function renderDatePicker() {
+            getUniqueDates();
+            const container = document.getElementById('date-picker-container');
+            if (!container) return; // Se não estiver na aba Agenda, ignora
             
-            data.forEach(post => {
-                const postDiv = document.createElement('div');
-                postDiv.className = 'mb-6 card rounded-xl shadow-md overflow-hidden';
-                postDiv.innerHTML = `
-                    <div class="h-48 w-full bg-gray-200 overflow-hidden relative">
-                        <!-- Imagem do Mural/Atualização -->
-                        <img src="${post.imageUrl}" alt="Imagem da atualização" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x200/94a3b8/fff?text=IMAGEM+INDISPONÍVEL';">
-                        <span class="absolute top-3 right-3 bg-white text-blue-800 text-xs font-bold px-3 py-1 rounded-full shadow-lg">${post.date}</span>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-1">${post.title}</h3>
-                        <p class="text-sm text-gray-600">${post.caption}</p>
-                    </div>
-                `;
-                container.appendChild(postDiv);
+            container.innerHTML = '';
+            
+            uniqueDates.forEach(fullDate => {
+                const datePart = fullDate.split('/')[0];
+                const button = document.createElement('button');
+                button.className = 'date-button';
+                button.textContent = datePart;
+                button.setAttribute('data-full-date', fullDate);
+                
+                if (fullDate === currentSelectedDate) {
+                    button.classList.add('active');
+                }
+                
+                button.onclick = () => selectDate(fullDate);
+                container.appendChild(button);
             });
         }
+        
+        function selectDate(fullDate) {
+            currentSelectedDate = fullDate;
+            renderAgenda(); 
+            renderDatePicker(); 
+        }
 
+        function renderAgenda() {
+            const container = document.getElementById('agenda-content');
+            if (!container) return;
+            container.innerHTML = '';
+            
+            const filteredData = AGENDA_DATA.filter(event => event.date.trim() === currentSelectedDate);
+
+            if (filteredData.length === 0) {
+                container.innerHTML = `<div class="p-6 card rounded-xl shadow-md text-center text-gray-500">
+                    <p>Nenhum evento agendado para esta data.</p>
+                </div>`;
+                return;
+            }
+
+            const headerDiv = document.createElement('div');
+            headerDiv.className = 'mb-4 text-center';
+            const dayOfWeek = currentSelectedDate.split('(')[1].replace(')', '');
+            const dateOnly = currentSelectedDate.split('(')[0].trim();
+            headerDiv.innerHTML = `
+                <p class="text-xl font-bold text-blue-800">${dayOfWeek}</p>
+                <p class="text-3xl font-extrabold text-blue-900">${dateOnly}</p>
+            `;
+            container.appendChild(headerDiv);
+
+
+            const listCard = document.createElement('div');
+            listCard.className = 'card rounded-xl shadow-lg p-4 space-y-2';
+
+            filteredData.forEach(event => {
+                const eventDiv = document.createElement('div');
+                eventDiv.className = 'flex justify-between items-center py-3 border-b border-gray-100 last:border-b-0';
+                eventDiv.innerHTML = `
+                    <div>
+                        <p class="font-bold text-base">${event.title}</p>
+                        <p class="text-xs text-gray-500">${event.location}</p>
+                    </div>
+                    <span class="font-bold text-lg text-blue-600">${event.time}</span>
+                `;
+                listCard.appendChild(eventDiv);
+            });
+
+            container.appendChild(listCard);
+            lucide.createIcons();
+        }
+        
+        // --- Função de Troca de Abas ---
         function switchTab(tabName) {
             currentTab = tabName;
             
+            // Gerenciar Visibilidade
+            document.getElementById('agenda-section').classList.add('hidden');
+            document.getElementById('info-section').classList.add('hidden');
+            document.getElementById('contatos-section').classList.add('hidden');
+            document.getElementById(`${tabName}-section`).classList.remove('hidden');
+
             // Gerenciar Botões
             document.querySelectorAll('.tab-button').forEach(btn => {
                 btn.classList.remove('active');
-                if (document.body.classList.contains('dark-mode')) {
-                    btn.classList.remove('text-blue-800');
-                    btn.classList.add('text-gray-400');
-                } else {
-                    btn.classList.remove('text-gray-400');
-                    btn.classList.add('text-gray-500');
-                }
             });
-            const activeBtn = document.getElementById(`${tabName}-btn`);
-            activeBtn.classList.add('active');
-            activeBtn.classList.remove('text-gray-500', 'text-gray-400');
+            document.getElementById(`${tabName}-btn`).classList.add('active');
 
-
-            // Gerenciar Conteúdo
-            document.getElementById('agenda-content').classList.add('hidden');
-            document.getElementById('mural-content').classList.add('hidden');
-            document.getElementById(`${tabName}-content`).classList.remove('hidden');
-
-            // Renderizar o conteúdo
+            // Chamadas específicas de renderização
             if (tabName === 'agenda') {
-                renderAgenda(AGENDA_DATA);
-            } else if (tabName === 'mural') {
-                renderMural(MURAL_DATA);
+                renderDatePicker(); // Renderiza os botões do calendário
+                renderAgenda(); // Renderiza o conteúdo do dia
             }
+            lucide.createIcons();
         }
-        
+
+
         // --- Dark Mode Logic ---
 
         function applyTheme(isDark) {
             const body = document.body;
+            const themeIconContainer = document.getElementById('theme-icon');
+            
             if (isDark) {
                 body.classList.remove('light-mode');
                 body.classList.add('dark-mode');
-                // Altera a cor da meta tag do PWA para Dark Mode
                 document.querySelector('meta[name="theme-color"]').setAttribute('content', '#1e293b');
-                document.getElementById('theme-icon').innerHTML = '<i data-lucide="sun" class="w-5 h-5"></i>';
+                themeIconContainer.innerHTML = '<i data-lucide="sun" class="w-5 h-5"></i>';
             } else {
                 body.classList.remove('dark-mode');
                 body.classList.add('light-mode');
-                // Altera a cor da meta tag do PWA para Light Mode
                 document.querySelector('meta[name="theme-color"]').setAttribute('content', '#1e3a8a');
-                document.getElementById('theme-icon').innerHTML = '<i data-lucide="moon" class="w-5 h-5"></i>';
+                themeIconContainer.innerHTML = '<i data-lucide="moon" class="w-5 h-5"></i>';
             }
-            // Chama a função de renderização novamente para aplicar as cores do tema
-            switchTab(currentTab); 
+            
+            // Re-renderiza o calendário para aplicar as cores do tema
+            if (currentTab === 'agenda') {
+                renderDatePicker();
+            }
             lucide.createIcons(); 
         }
 
@@ -236,6 +246,7 @@
         }
 
         function loadTheme() {
+            getUniqueDates(); // Primeiro carrega as datas
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'dark') {
                 applyTheme(true);
@@ -246,9 +257,8 @@
         
         // Inicialização
         document.addEventListener('DOMContentLoaded', () => {
-            loadTheme(); // Carrega o tema salvo
-            lucide.createIcons();
-            switchTab('agenda'); // Inicia na aba Agenda
+            loadTheme(); // Inicia o carregamento do tema, que chama a renderização
+            switchTab('agenda'); // Define a aba inicial
         });
 
     </script>
@@ -267,32 +277,97 @@
                  <!-- Icone inserido por JS -->
             </button>
         </div>
+        <!-- BARRA DE NAVEGAÇÃO POR ABAS -->
         <div class="max-w-xl mx-auto px-4 flex justify-around border-t border-gray-100">
-            <button id="agenda-btn" onclick="switchTab('agenda')" class="tab-button flex-1 py-3 text-sm flex justify-center items-center gap-2">
+            <button id="agenda-btn" onclick="switchTab('agenda')" class="tab-button flex-1 py-3 text-sm flex justify-center items-center gap-2 text-gray-500">
                 <i data-lucide="calendar-days" class="w-4 h-4"></i> Agenda
             </button>
-            <button id="mural-btn" onclick="switchTab('mural')" class="tab-button flex-1 py-3 text-sm flex justify-center items-center gap-2">
-                <i data-lucide="images" class="w-4 h-4"></i> Mural & Fotos
+            <button id="info-btn" onclick="switchTab('info')" class="tab-button flex-1 py-3 text-sm flex justify-center items-center gap-2 text-gray-500">
+                <i data-lucide="info" class="w-4 h-4"></i> Informações
+            </button>
+            <button id="contatos-btn" onclick="switchTab('contatos')" class="tab-button flex-1 py-3 text-sm flex justify-center items-center gap-2 text-gray-500">
+                <i data-lucide="phone" class="w-4 h-4"></i> Contatos
             </button>
         </div>
     </header>
-A
+
     <main class="flex-1 max-w-xl mx-auto px-4 py-6 w-full">
-        <!-- Conteúdo da Agenda (Visível porA Padrão) -->
-        <div id="agenda-content" class="space-y-4">
-            <!-- Conteúdo injetado pelo JavaScript -->
+        <!-- SEÇÃO 1: AGENDA -->
+        <div id="agenda-section">
+            <!-- BARRA DE SELEÇÃO DE DIAS (CALENDÁRIO) -->
+            <div class="mb-6">
+                <h2 class="text-sm font-bold mb-3 text-gray-600 flex items-center gap-2"><i data-lucide="calendar-check" class="w-4 h-4"></i>Selecione o Dia</h2>
+                <div id="date-picker-container" class="date-picker-scroll flex pb-2">
+                    <!-- Botões dos dias injetados pelo JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Conteúdo da Agenda (Apenas do Dia Selecionado) -->
+            <div id="agenda-content" class="space-y-4">
+                <!-- Conteúdo injetado pelo JavaScript -->
+            </div>
+            <p class="mt-8 text-center text-xs text-gray-400">Paróquia Nossa Senhora da Conceição - Diocese da Campanha - Minas Gerais</p>
         </div>
 
-        <!-- Conteúdo do Mural (Escondido por Padrão) -->
-        <div id="mural-content" class="space-y-4 hidden">
-            <!-- Conteúdo injetado pelo JavaScript -->
+        <!-- SEÇÃO 2: INFORMAÇÕES (Inicialmente Escondida) -->
+        <div id="info-section" class="hidden space-y-6">
+            <div class="card rounded-xl shadow-lg p-5">
+                <h2 class="text-xl font-bold mb-3 text-blue-800 flex items-center gap-2"><i data-lucide="church" class="w-5 h-5"></i> Sobre a Paróquia</h2>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    A Paróquia Nossa Senhora da Conceição, em Virgínia/MG, foi criada em 15 de Novembro de 1866. Sua fundação remonta a 1856, quando o Padre Custódio de Oliveira Monte-Raso dedicou a capela à Virgem Santíssima, dando origem ao nome da cidade. É um farol de fé no Sul de Minas, comprometida com a Palavra de Deus e a caridade. Nossa missão é evangelizar e acolher a todos com amor fraterno.
+                </p>
+            </div>
+            <div class="card rounded-xl shadow-lg p-5">
+                <h2 class="text-xl font-bold mb-3 text-blue-800 flex items-center gap-2"><i data-lucide="clock" class="w-5 h-5"></i> Horário do Escritório Paroquial</h2>
+                <div class="text-sm text-gray-600 space-y-2">
+                    <div class="flex justify-between border-b border-gray-100 pb-1"><span class="font-bold">Segunda a Sexta:</span><span>08:00h – 17:00h</span></div>
+                    <div class="flex justify-between"><span class="font-bold">Sábados e Domingos:</span><span>Fechado</span></div>
+                </div>
+            </div>
         </div>
 
-        <p class="mt-8 text-center text-xs text-gray-400">Agenda Paroquial Semanal de 24 a 30 de Novembro.</p>
+        <!-- SEÇÃO 3: CONTATOS (Inicialmente Escondida) -->
+        <div id="contatos-section" class="hidden space-y-4">
+            <div class="card rounded-xl shadow-lg p-5 space-y-4">
+                <h2 class="text-xl font-bold mb-3 text-blue-800 flex items-center gap-2"><i data-lucide="phone-call" class="w-5 h-5"></i> Escritório Paroquial</h2>
+                
+                <a href="https://wa.me/553533731397" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-3 bg-green-50 hover:bg-green-100 rounded-lg transition-colors">
+                    <i data-lucide="message-square" class="w-6 h-6 text-green-600"></i>
+                    <div>
+                        <p class="font-bold text-sm text-blue-800">WhatsApp Oficial</p>
+                        <p class="text-xs text-gray-500">(35) 3373-1397</p>
+                    </div>
+                </a>
+
+                <a href="tel:+553532611217,8007" class="flex items-center gap-4 p-3 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors">
+                    <i data-lucide="phone" class="w-6 h-6 text-blue-600"></i>
+                    <div>
+                        <p class="font-bold text-sm text-blue-800">Telefone com Ramal</p>
+                        <p class="text-xs text-gray-500">(35) 3261-1217 ramal 8007</p>
+                    </div>
+                </a>
+
+                <a href="mailto:paroquiavirginia@yahoo.com.br" class="flex items-center gap-4 p-3 bg-red-50 hover:bg-red-100 rounded-lg transition-colors">
+                    <i data-lucide="mail" class="w-6 h-6 text-red-600"></i>
+                    <div>
+                        <p class="font-bold text-sm text-blue-800">E-mail Oficial</p>
+                        <p class="text-xs text-gray-500">paroquiavirginia@yahoo.com.br</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="card rounded-xl shadow-lg p-5">
+                <h2 class="text-xl font-bold mb-3 text-blue-800 flex items-center gap-2"><i data-lucide="map-pin" class="w-5 h-5"></i> Localização</h2>
+                <p class="text-sm text-gray-600">Praça Cônego Monte Raso, nº 304 - Centro<br>37465-000, Virgínia/MG</p>
+                <a href="https://www.google.com/maps/search/?api=1&query=Praça+Cônego+Monte+Raso,+304,+Virgínia+-+MG" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-700">
+                    Ver no Mapa <i data-lucide="external-link" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
     </main>
     
     <footer class="text-center py-4 text-xs text-gray-500 border-t border-gray-200 mt-auto header-bg">
-        Desenvolvido por: Emanuel Uchôas para: @aparoquia
+        Desenvolvido por Emanuel Uchôas
     </footer>
 </body>
 </html>
